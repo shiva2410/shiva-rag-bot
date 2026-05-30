@@ -1,0 +1,27 @@
+<section id="contact" class="section pb-28">
+  <div class="mx-auto max-w-5xl px-5 lg:px-8">
+    <div class="contact-panel reveal">
+      <p class="eyebrow">Contact</p>
+      <h2 class="mt-4 text-4xl font-extrabold text-slate-950 sm:text-5xl">Let’s build production AI.</h2>
+      <p class="mt-5 max-w-2xl text-lg leading-8 text-slate-600">Reach out for GenAI platforms, agentic workflows, LLMOps systems, or scalable inference engineering.</p>
+      <div class="mt-8 grid gap-4 md:grid-cols-3">
+        <a class="contact-card" href="mailto:{{ portfolio.profile.email }}">
+          <span>Email</span>
+          <strong>{{ portfolio.profile.email }}</strong>
+        </a>
+        <a class="contact-card" href="{{ portfolio.profile.linkedin }}" target="_blank" rel="noopener">
+          <span>LinkedIn</span>
+          <strong>shiva-thavani</strong>
+        </a>
+        <a class="contact-card" href="{{ portfolio.profile.github }}" target="_blank" rel="noopener">
+          <span>GitHub</span>
+          <strong>shiva2410</strong>
+        </a>
+      </div>
+      <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+        <a href="/resume" class="btn-primary">Download Resume</a>
+        <a href="mailto:{{ portfolio.profile.email }}" class="btn-secondary">Start a Conversation</a>
+      </div>
+    </div>
+  </div>
+</section>

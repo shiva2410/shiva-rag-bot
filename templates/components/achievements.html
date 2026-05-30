@@ -1,0 +1,21 @@
+<section id="achievements" class="section">
+  <div class="mx-auto max-w-7xl px-5 lg:px-8">
+    <div class="section-heading reveal">
+      <p class="eyebrow">Achievements</p>
+      <h2>Hackathon wins and academic distinction.</h2>
+    </div>
+    <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      {% for achievement in portfolio.achievements %}
+      <div class="achievement-card reveal">
+        {% if achievement.image %}
+        <img src="{{ url_for('static', path='images/' ~ achievement.image) }}" alt="{{ achievement.title }}" class="achievement-image">
+        {% else %}
+        <div class="achievement-fallback">✦</div>
+        {% endif %}
+        <h3 class="mt-4 text-lg font-semibold text-slate-950">{{ achievement.title }}</h3>
+        <p class="mt-2 text-sm text-slate-500">{{ achievement.detail }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>

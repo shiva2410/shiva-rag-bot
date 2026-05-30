@@ -1,0 +1,30 @@
+<section id="about" class="section">
+  <div class="mx-auto max-w-7xl px-5 lg:px-8">
+    <div class="section-heading reveal">
+      <p class="eyebrow">About</p>
+      <h2>Enterprise AI, engineered for production.</h2>
+    </div>
+    <div class="grid gap-6 lg:grid-cols-[0.85fr_1.15fr]">
+      <div class="glass-card reveal">
+        <img src="{{ url_for('static', path='images/profile.jpeg') }}" alt="Shiva Thavani profile" class="mx-auto h-44 w-44 rounded-3xl border border-slate-200 object-cover shadow-soft">
+        <div class="mt-6 text-center">
+          <h3 class="text-2xl font-bold text-slate-950">{{ portfolio.profile.name }}</h3>
+          <p class="mt-2 text-violet-600">{{ portfolio.profile.subheadline }}</p>
+        </div>
+      </div>
+      <div class="glass-card reveal">
+        {% for paragraph in portfolio.about %}
+          <p class="text-lg leading-8 text-slate-600 {% if not loop.first %}mt-5{% endif %}">{{ paragraph }}</p>
+        {% endfor %}
+        <div class="mt-8 grid gap-3 sm:grid-cols-2">
+          {% for metric in portfolio.metrics %}
+          <div class="rounded-2xl bg-slate-50 p-5">
+            <span class="text-3xl font-extrabold text-slate-950">{{ metric.value }}</span>
+            <p class="mt-1 text-sm text-slate-500">{{ metric.label }}</p>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

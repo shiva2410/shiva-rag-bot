@@ -1,0 +1,34 @@
+<header id="navbar" class="fixed inset-x-0 top-0 z-50 border-b border-slate-200/70 bg-white/75 transition">
+  <nav class="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 lg:px-8">
+    <a href="#home" class="group flex items-center gap-2 text-sm text-slate-600 hover:text-slate-950">
+      <span aria-hidden="true">←</span>
+      <span>back to portfolio</span>
+    </a>
+    <div class="hidden items-center gap-7 text-sm text-slate-600 md:flex">
+      <a class="nav-link" href="#about">About</a>
+      <a class="nav-link" href="#experience">Experience</a>
+      <a class="nav-link" href="#skills">Skills</a>
+      <a class="nav-link" href="#projects">Projects</a>
+      <a class="nav-link" href="#achievements">Achievements</a>
+      <a class="nav-link" href="#contact">Contact</a>
+    </div>
+    <div class="hidden items-center gap-4 md:flex">
+      <a href="{{ portfolio.profile.github }}" target="_blank" rel="noopener" class="text-sm text-slate-600 hover:text-slate-950">github</a>
+      <a href="{{ portfolio.profile.linkedin }}" target="_blank" rel="noopener" class="text-sm text-slate-600 hover:text-slate-950">linkedin</a>
+      <a href="/resume" class="resume-pill">resume</a>
+    </div>
+    <button id="menu-toggle" class="md:hidden rounded-full border border-slate-200 p-2 text-slate-800" aria-label="Open menu">
+      <span class="block h-0.5 w-5 bg-current"></span>
+      <span class="mt-1.5 block h-0.5 w-5 bg-current"></span>
+    </button>
+  </nav>
+  <div id="mobile-menu" class="hidden border-t border-slate-200 bg-white px-5 pb-5 md:hidden">
+    <a class="mobile-link" href="#about">About</a>
+    <a class="mobile-link" href="#experience">Experience</a>
+    <a class="mobile-link" href="#skills">Skills</a>
+    <a class="mobile-link" href="#projects">Projects</a>
+    <a class="mobile-link" href="#achievements">Achievements</a>
+    <a class="mobile-link" href="#contact">Contact</a>
+    <a href="/resume" class="mt-4 inline-flex w-full justify-center rounded-full bg-slate-950 px-5 py-3 font-semibold text-white">Download Resume</a>
+  </div>
+</header>

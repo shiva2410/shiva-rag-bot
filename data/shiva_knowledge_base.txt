@@ -1,0 +1,402 @@
+SHIVA THAVANI
+AI/ML Engineer — RAG Knowledge Base
+Machine Learning Engineer @ Atlassian  |  thavani.shiva3@gmail.com  |  AWS Certified Developer Associate
+Q1 — How Do You Handle Production ML at Scale?
+Topic tags: MLOps, Production ML, Infrastructure, Scalability, Model Serving
+Core Philosophy
+Handling ML at scale requires treating model serving as a distributed systems problem — not just a data science problem. The key pillars are: containerized inference, robust MLOps pipelines, infrastructure-as-code, and observability from day one.
+Infrastructure & Model Serving
+Built and operated an AI Inference Service on top of AzureML at Autodesk, serving GenAI models to multiple enterprise-scale product teams.
+Optimized GPU inference workloads using CUDA-based containers — this delivered 2.5x throughput improvement and cut GPU utilization costs by 30%.
+Deployed and served large language models (LLaMA 2 & 3, Claude 3, GPT-4) on AWS Bedrock and Azure AI Studio at Thomson Reuters, supporting 200+ data scientists and ML engineers.
+Used ONNX and TFLite runtimes at Atlassian to enable efficient, low-latency cross-platform model inference — critical for edge and mobile deployments.
+MLOps Pipeline & Lifecycle
+Owned the full MLOps lifecycle at Thomson Reuters: data processing → model development → production deployment → model monitoring.
+Engineered MLOps platforms using Infrastructure-as-Code tools: Terraform, CloudFormation templates, Bicep — enabling repeatable, auditable deployments across AWS and Azure.
+Built scalable ML workflows using Terraform, MLflow, and Kubeflow at Autodesk for enterprise AI platform operations including experiment tracking and model registry.
+Used AWS tools (Lambda, SageMaker Pipelines, DynamoDB, ECR, Kafka) and Azure equivalents (Azure Functions, AzureML Studio, Blob Storage, Kubernetes) for multi-cloud ML operations.
+Monitoring & Reliability
+Implemented model evaluation and optimization workflows for production AI systems at Thomson Reuters.
+Used Datadog for ML system observability — tracking latency, throughput, and drift metrics in production.
+Led the AI Platform service end-to-end — from initial development through broad organizational adoption — at Thomson Reuters, serving 200+ internal users.
+Q2 — What Is Your Strongest Technical Achievement?
+Topic tags: Achievements, Impact, Agentic AI, GPU Optimization, Scale
+Primary Achievement: Agentic CSM-Rovo AI Customer Support Agent (Atlassian)
+The most technically complex and high-impact achievement is the end-to-end design and deployment of the CSM-Rovo Agentic AI Customer Support Agent at Atlassian.
+Architected and deployed a fully agentic AI system using LangGraph for stateful multi-step reasoning and Model Context Protocol (MCP) for dynamic tool orchestration.
+Achieved 45%+ reduction in manual intervention in customer support workflows — a direct, measurable operational impact.
+Implemented GraphRAG-based guidance workflows for knowledge graph-driven context retrieval, powered by GPT-5.2 and Gemini-3-Flash models.
+Enabled 10,000+ AI-assisted resolved conversations through GTM and support workflow rollout — demonstrating enterprise-grade scale.
+Hybrid orchestration using LlamaIndex improved response relevance by 35% over baseline.
+Runner-Up: GPU Inference Optimization (Autodesk)
+Optimized CUDA-based GPU inference containers resulting in 2.5x throughput improvement and 30% GPU cost reduction.
+This required deep systems knowledge: container optimization, GPU memory management, CUDA tuning, and AzureML deployment engineering.
+Academic Achievement
+Gold Medalist across the dual BE-MBA degree program at Thapar Institute — CSE CGPA 9.26/10, MBA CGPA 8.91/10.
+First Rank at TIET in consecutive academic years (2018-19, 2019-20) with Merit Scholarships both years.
+Hackathon Record
+Winner — Smart India Hackathon 2020 (Open Innovation)
+1st Prize — EY GDS Hackpions Hackathon 2021 (Intelligent Automation with AI)
+1st Prize — Bosch AI Hackathon 2021 (Smart AI Robot)
+1st Prize — Xebia Xe-Thon 2021 (Intelligent Hiring using AI)
+Q3 — Tell Me About a Hard Production Problem You've Solved
+Topic tags: Problem Solving, Production Incidents, Debugging, LLM Ops, Infrastructure
+Problem 1: GPU Throughput & Cost Crisis at Autodesk
+Context: After deploying GenAI models in the Autodesk product suite via the AzureML-based AI Inference Service, GPU utilization costs escalated unsustainably as model usage scaled.
+Root cause: Inference workloads were not batched efficiently, and containers were not optimized for CUDA memory hierarchy — leading to poor GPU utilization and high idle time.
+Solution: Re-architected inference containers using CUDA-optimized base images, tuned batch sizes per model, and restructured request routing to maximize GPU parallelism.
+Result: 2.5x throughput improvement and 30% reduction in GPU utilization costs — at enterprise scale, this translates to significant annual infrastructure savings.
+Additionally led the ML model lifecycle management architecture to prevent similar problems across future model deployments.
+Problem 2: Agentic AI Reliability in Customer Support Workflows (Atlassian)
+Context: Deploying an agentic AI agent (CSM-Rovo) in live customer support workflows introduced non-determinism and tool orchestration failures at scale.
+Challenge: LangGraph-based agentic workflows can enter unexpected states when tool calls fail, context windows overflow, or external APIs time out mid-workflow.
+Solution: Implemented robust stateful orchestration with LangGraph's checkpointing, added MCP-level fallback strategies, and used LlamaIndex semantic pipelines to ensure context continuity even under partial failures.
+Result: Agent successfully handled 10k+ conversations with 45%+ reduction in manual intervention, demonstrating production-grade reliability.
+Problem 3: AI Platform Scaling at Thomson Reuters
+Context: The AI Platform needed to support 200+ data scientists across AWS and Azure simultaneously — a multi-cloud, multi-team orchestration challenge.
+Built a unified MLOps platform using IaC (Terraform, CloudFormation) so that infrastructure provisioning was repeatable and not a manual bottleneck.
+Integrated Kafka-based event streaming for async model inference pipelines, decoupling data scientists from infrastructure concerns.
+Deployed LLMs (LLaMA 2 & 3, Claude 3, GPT-4) on AWS Bedrock and Azure AI Studio with consistent API abstractions, giving users model-agnostic access.
+Q4 — Why Should We Hire You Over Other Senior ML Candidates?
+Topic tags: Differentiation, Value Proposition, Leadership, Breadth vs Depth, Agentic AI
+Rare Combination: Research Depth + Production Engineering
+Most ML candidates are strong in one dimension — either research (model building) or engineering (infrastructure). Shiva is strong in both: he has trained custom models (TensorFlow Object Detection, 90%+ accuracy) AND built the infrastructure platforms that serve them at enterprise scale.
+This means he can own end-to-end AI product development without handoffs between data science and MLOps teams.
+Agentic AI Expertise — Ahead of the Curve
+Agentic AI (LangGraph, MCP, GraphRAG, RAG, ReAct/CoT reasoning) is the current frontier of applied AI. Shiva has already shipped production agentic systems at Atlassian — not just prototyped them.
+Experience with LangGraph stateful agents, Model Context Protocol for tool orchestration, and GraphRAG knowledge graph retrieval is rare in the industry as of 2025.
+Multi-Cloud Enterprise Platform Experience
+Has hands-on production experience across AWS (SageMaker, Bedrock, Lambda, ECR, DynamoDB), Azure (AzureML, Azure AI Studio, Azure OpenAI, AKS, Azure Functions), and GCP (Vertex AI).
+This breadth means he can operate in any cloud environment without a ramp-up period.
+Track Record of Quantified Impact
+45%+ reduction in manual support intervention (Atlassian)
+35% improvement in AI response relevance (Atlassian)
+2.5x GPU throughput improvement (Autodesk)
+30% GPU cost reduction (Autodesk)
+10,000+ AI-assisted conversations enabled (Atlassian)
+200+ data scientists and ML engineers supported on AI Platform (Thomson Reuters)
+90%+ object detection accuracy on enterprise documents (EY)
+Execution at Scale + Leadership
+Led rollout of the CSM AI Agent across GTM and support workflows — this was not just engineering, but cross-functional delivery involving product, support, and GTM teams.
+Led AI Platform service at Thomson Reuters from development all the way through organizational adoption.
+4x hackathon winner demonstrates the ability to rapidly prototype and deliver under pressure.
+Q5 — What Did You Build at Atlassian?
+Topic tags: Atlassian, Agentic AI, CSM-Rovo, LangGraph, MCP, GraphRAG, LlamaIndex, ONNX
+Tenure: June 2025 – Present    Role: Machine Learning Engineer
+1. CSM-Rovo Agentic AI Customer Support Agent
+This is the flagship project. CSM-Rovo is an AI agent purpose-built for Atlassian's Customer Success Management (CSM) and support workflows.
+Architecture: Built on LangGraph for stateful, multi-step agent reasoning. LangGraph allows the agent to pause, branch, and resume workflows based on context — critical for complex support escalations.
+Tool Orchestration: Used Model Context Protocol (MCP) to give the agent dynamic access to external tools (Jira APIs, Confluence knowledge base, customer account data) without hardcoding tool logic into the agent.
+Hybrid Orchestration + Semantic Retrieval: Implemented LlamaIndex-based semantic query pipelines to retrieve the most contextually relevant knowledge base content. This hybrid approach (structured + semantic retrieval) improved response relevance by 35%.
+Knowledge Graph Retrieval: Developed GraphRAG-based guidance workflows — the agent traverses a knowledge graph to retrieve interconnected context, not just flat document chunks. Uses GPT-5.2 and Gemini-3-Flash as backbone models.
+Outcome: Reduced manual intervention in support workflows by 45%+ and enabled 10,000+ AI-assisted resolved conversations.
+2. Cross-Platform Model Optimization
+Optimized and deployed AI models using ONNX and TFLite runtimes for efficient, low-latency inference across different hardware targets (cloud, edge, mobile).
+This is critical for Atlassian products that need to run AI inference outside of GPU-backed cloud environments.
+3. GTM and Support Workflow Rollout
+Led the full production rollout of CSM-Rovo across Go-To-Market (GTM) and customer support teams — not just building the system but operationalizing it at scale.
+This included integration with existing Atlassian support tooling, monitoring setup, and ensuring reliability in live customer-facing workflows.
+Q6 — What Did You Build at Thomson Reuters?
+Topic tags: Thomson Reuters, AI Platform, MLOps, LLM Deployment, AWS, Azure, IaC, SageMaker
+Tenure: September 2022 – July 2024    Role: AI Engineer → Senior AI Engineer
+1. Enterprise AI Platform (Supporting 200+ Data Scientists)
+The core project at Thomson Reuters was building and operating a centralized AI Platform that served all stages of the Data Science Lifecycle for 200+ data scientists and ML engineers across the organization.
+Scope: The platform covered the full ML lifecycle: data ingestion and processing, model development environments, model training pipelines, model deployment to production, and post-deployment model monitoring.
+Cloud Coverage: Built on AWS (SageMaker Studio, S3, Lambda, ECR, DynamoDB, SageMaker Pipelines, Kafka) and Azure (AzureML Studio, Azure AI Studio, Azure OpenAI, Blob Storage, Azure Functions, Kubernetes).
+Also integrated GCP Vertex AI into the platform, making it a true multi-cloud AI infrastructure.
+2. MLOps Platform via Infrastructure-as-Code
+Engineered the entire MLOps platform using IaC tools — Terraform and CloudFormation templates — ensuring all infrastructure was version-controlled, repeatable, and auditable.
+This eliminated manual provisioning bottlenecks and enabled self-service infrastructure for data science teams.
+Managed the full MLOps lifecycle including data processing pipelines, model training orchestration, production deployment workflows, and model monitoring dashboards.
+3. LLM Deployment & Serving
+Deployed and served production LLMs including LLaMA 2, LLaMA 3, Claude 3, and GPT-4 on both AWS Bedrock and Azure AI Studio.
+Implemented model evaluation and optimization workflows to ensure deployed models met quality and latency SLAs before reaching production.
+This gave Thomson Reuters' 200+ data scientists model-agnostic access to state-of-the-art LLMs through a unified platform API.
+4. Agentic AI Incident Resolution (Autodesk-era pattern, also applied at TR)
+Developed Agentic AI incident-resolution workflows using LangChain, RAG, VectorDBs, OpenAI models, and ReAct/Chain-of-Thought reasoning.
+These agents could autonomously investigate production incidents, retrieve relevant runbooks from VectorDBs, and propose or execute remediation steps.
+5. Platform Leadership
+Progressed from AI Engineer to Senior AI Engineer in under a year — took on ownership of the AI Platform service, leading it from initial development through broad organizational adoption.
+Responsible not just for technical delivery but for stakeholder management and driving adoption across 200+ platform users.
+Q7 — What Did You Build at Autodesk?
+Topic tags: Autodesk, AI Inference Service, AzureML, CUDA, GPU Optimization, MLOps, LangChain, Agentic AI, Kubeflow, MLflow, Terraform
+Tenure: July 2024 - June 2025    Role: Senior AI/ML Engineer
+1. AI Inference Service on AzureML
+The primary deliverable at Autodesk was designing and deploying a production AI Inference Service that brought GenAI capabilities into the Autodesk product suite.
+Built an ML Platform-level inference service on top of AzureML, acting as the centralized gateway for all AI model serving across Autodesk products.
+Led the AI inference service architecture for ML model lifecycle management — covering model registration, versioning, deployment, rollout, and deprecation across multiple enterprise-scale applications.
+The service abstracted model complexity from product teams, giving them a clean API to invoke AI capabilities without managing infrastructure.
+2. GPU Inference Optimization
+Optimized GPU inference workloads using CUDA-based containers — reduced GPU utilization costs by 30% and improved throughput by 2.5x.
+Profiled inference bottlenecks, tuned batch sizes per model type, and restructured request routing to maximize GPU parallelism and minimize idle time.
+This work directly enabled Autodesk to scale GenAI features cost-effectively across its large product portfolio.
+3. Scalable ML Workflows
+Built and managed scalable ML workflows using Terraform (infrastructure), MLflow (experiment tracking and model registry), and Kubeflow (ML pipeline orchestration).
+Terraform ensured all infrastructure was reproducible and version-controlled; MLflow provided model lineage and experiment tracking; Kubeflow handled distributed training and pipeline scheduling.
+4. Agentic AI Incident Resolution
+Developed Agentic AI incident-resolution workflows using LangChain, RAG, VectorDBs, OpenAI models, and ReAct/Chain-of-Thought reasoning patterns.
+These agents could autonomously investigate production incidents: retrieve relevant runbooks and documentation from VectorDBs, reason over the evidence using ReAct patterns, and propose or execute remediation steps.
+Q8 — What Did You Build at EY GDS?
+Topic tags: EY, Document AI, TensorFlow, Object Detection, Azure Kubernetes Service, AKS, Computer Vision, Early Career
+Tenure: April 2021 - August 2022    Role: Data Scientist (Internship to FTE)
+1. Document AI Model
+At Ernst & Young GDS, the core project was building an AI-powered Document AI system for enterprise document processing workflows.
+Trained a custom AI model using TensorFlow Object Detection API to detect, classify, and locate key elements within enterprise documents (forms, invoices, contracts, etc.).
+Achieved 90%+ object detection accuracy on enterprise document datasets — a strong result for the complexity and variability of real-world business documents.
+2. Production Deployment on Azure Kubernetes Service
+Containerized the Document AI models using Docker and deployed them on Azure Kubernetes Service (AKS) via Azure ML deployment pipelines.
+This was Shiva's first experience operationalizing ML models in a production Kubernetes environment — setting the foundation for the cloud-native MLOps expertise built at Thomson Reuters, Autodesk, and Atlassian.
+Significance
+EY GDS is also where Shiva won 1st Prize at the Hackpions-EY GDS Hackathon 2021 for Intelligent Automation with AI.
+He transitioned from intern to full-time employee here, validating his delivery quality from the earliest stage of his career.
+Q9 — What Is Your Full Technical Stack?
+Topic tags: Technical Skills, Stack, Tools, Languages, Frameworks, Cloud, MLOps, GenAI, Infrastructure
+Generative AI and LLM Tooling
+Orchestration Frameworks: LangGraph, LangChain, LangSmith, LlamaIndex
+Retrieval and Knowledge: GraphRAG, RAG (Retrieval Augmented Generation), VectorDB
+Tool Orchestration: Model Context Protocol (MCP)
+Model APIs: OpenAI APIs (GPT-4, GPT-5.2), Anthropic Claude (Claude 3), Google Gemini (Gemini-3-Flash)
+Prompt Engineering: Chain-of-Thought (CoT), ReAct (Reasoning + Acting), few-shot and zero-shot techniques
+Programming and Scripting Languages
+Primary: Python (ML, scripting, API development), SQL (data querying)
+Systems: C, C++, Golang
+Web/Mobile: JavaScript, Kotlin
+Scripting and Automation: Shell Script, R
+ML Frameworks and Runtimes
+Deep Learning: TensorFlow, PyTorch, Hugging Face Transformers
+Computer Vision: OpenCV, YOLO
+API Serving: Flask, FastAPI
+Cross-Platform Inference: ONNX, TFLite
+GPU: CUDA, Nvidia GPU Toolkit
+MLOps and Cloud Infrastructure
+Cloud Platforms: Microsoft Azure (AzureML, Azure AI Studio, Azure OpenAI, AKS, Azure Functions, Blob Storage), AWS (SageMaker, Bedrock, Lambda, S3, ECR, DynamoDB, SageMaker Pipelines, Kafka), GCP (Vertex AI)
+Experiment Tracking and Registry: MLflow
+Pipeline Orchestration: Kubeflow, SageMaker Pipelines, Kafka
+Containerization and Orchestration: Docker, Kubernetes
+Observability: Datadog
+Big Data: PySpark
+Infrastructure as Code (IaC)
+Terraform — primary IaC tool across AWS and Azure
+CloudFormation Templates — AWS-native IaC
+Bicep Templates — Azure-native IaC
+AWS WAF, Route 53 — networking and security
+Azure Service Principal — identity and access management
+Certifications
+AWS Certified Developer — Associate
+Q10 — How Do You Approach Agentic AI System Design?
+Topic tags: Agentic AI, System Design, LangGraph, MCP, RAG, GraphRAG, ReAct, Tool Use, Reliability
+Core Design Philosophy
+Agentic AI systems are fundamentally different from traditional ML pipelines — they involve non-deterministic, multi-step decision loops with external tool access. The design must account for reliability, observability, and graceful degradation from the start.
+Step 1: Define the Agent Reasoning Backbone
+Choose the right orchestration framework based on workflow complexity. LangGraph is preferred for complex, stateful, multi-step workflows (like CSM-Rovo) because it provides explicit state management, branching logic, and checkpointing.
+LangChain is suitable for simpler, linear agentic workflows — used at Autodesk for incident resolution agents.
+Define the reasoning pattern upfront: ReAct (Reasoning + Acting) for tool-heavy agents; CoT (Chain-of-Thought) for reasoning-heavy tasks.
+Step 2: Design Tool Orchestration
+Use Model Context Protocol (MCP) for dynamic tool registration and invocation — this decouples the agent logic from specific tool implementations, making the system extensible without re-engineering the agent.
+Each tool should have a well-defined schema, idempotency where possible, and timeout/retry policies.
+Step 3: Build the Knowledge Retrieval Layer
+For factual grounding: implement RAG with a VectorDB for dense semantic retrieval.
+For complex, interconnected knowledge: use GraphRAG — retrieval traverses a knowledge graph to surface related context that flat document retrieval would miss.
+Hybrid retrieval (LlamaIndex semantic pipelines + structured queries) gives the best response relevance — demonstrated 35% improvement at Atlassian.
+Step 4: Handle Agent Failure Modes
+Implement LangGraph checkpointing so agents can resume from known-good states after tool failures or context overflows.
+Add MCP-level fallback strategies: if a primary tool fails, the agent should gracefully degrade to a secondary source rather than halting.
+Set hard limits on agent loop iterations to prevent runaway execution.
+Step 5: Observability and Evaluation
+Use LangSmith for tracing agent execution chains — see exactly which tool was called, with what input, and what was returned at every step.
+Instrument key metrics: tool call success rate, latency per step, context window usage, hallucination rate.
+Build offline evaluation datasets to regression-test agent behavior before each deployment.
+Q11 — How Do You Approach LLM Evaluation and Quality in Production?
+Topic tags: LLM Evaluation, Model Quality, Production AI, Hallucination, LangSmith, Monitoring, Metrics
+The Problem with LLM Evaluation
+Unlike classical ML (where accuracy on a held-out test set is sufficient), LLM quality in production is multi-dimensional: factual correctness, response relevance, tone, latency, safety, and consistency all matter. Each dimension requires a different evaluation strategy.
+Offline Evaluation (Pre-Deployment)
+Build golden datasets: curated input-output pairs representing the full range of expected queries including edge cases, adversarial inputs, and high-stakes scenarios.
+Use LLM-as-judge patterns: a separate model (e.g., GPT-4) evaluates the target model's responses against the golden dataset, scoring on faithfulness, relevance, and completeness.
+Implemented model evaluation and optimization workflows for production AI systems at Thomson Reuters before any model was promoted to production.
+Online Evaluation (Post-Deployment)
+Use LangSmith to trace agent and LLM execution in production — each turn is logged with full context, tool calls, retrieved chunks, and final response.
+Monitor response latency percentiles (P50, P95, P99) per model and per workflow step.
+Track tool call success rates for agentic workflows — a degrading tool will cascade into poor agent responses.
+Human-in-the-loop feedback loops: at Atlassian, 10k+ AI-assisted conversations provided implicit signal on resolution quality.
+Retrieval Quality (RAG-Specific)
+Measure retrieval precision and recall: are the right chunks being retrieved for each query?
+At Atlassian, hybrid semantic retrieval via LlamaIndex improved response relevance by 35% — measured by comparing output quality against a baseline single-retriever system.
+Model Optimization Cycle
+Identify failure modes from LangSmith traces and production logs.
+Update golden datasets with new failure cases, re-run offline evaluation.
+Tune prompts, retrieval strategies, or swap models based on evaluation delta.
+Gate production promotion behind a minimum quality threshold on the full evaluation suite.
+Q12 — How Do You Optimize ML Infrastructure Costs?
+Topic tags: Cost Optimization, GPU, CUDA, Cloud Costs, Inference Efficiency, ONNX, TFLite, Infrastructure
+GPU Cost Optimization (Autodesk)
+Problem: GenAI model inference at Autodesk was scaling rapidly, and GPU utilization costs were growing unsustainably.
+Solution 1 — Container Optimization: Re-architected inference containers using CUDA-optimized base images tuned for specific GPU SKUs on AzureML.
+Solution 2 — Batching: Tuned dynamic batching parameters per model — smaller models handled larger batches; larger models required smaller batches with longer timeouts.
+Solution 3 — Request Routing: Restructured request routing to maximize GPU parallelism, reducing idle GPU time between requests.
+Result: 2.5x throughput improvement and 30% GPU cost reduction.
+Cross-Platform Inference Efficiency (Atlassian)
+Used ONNX runtime for cross-platform model export: models trained in PyTorch or TensorFlow are exported to ONNX format, enabling optimized inference across CPU, GPU, and edge hardware without re-training.
+Used TFLite for mobile and edge deployments where GPU is unavailable — enabling AI inference on-device at low latency without cloud round-trips.
+Infrastructure Cost Control via IaC
+Using Terraform and CloudFormation at Thomson Reuters and Autodesk ensured infrastructure was right-sized from the start — no over-provisioned idle resources.
+Automated teardown of non-production environments outside working hours using scheduled Terraform cycles.
+MLflow model registry prevented model duplication — teams shared model artifacts rather than each training their own copy.
+Model Selection for Cost-Performance Tradeoffs
+At Atlassian, used Gemini-3-Flash alongside GPT-5.2 — Flash for low-latency high-volume subtasks; GPT-5.2 for complex reasoning requiring higher accuracy.
+This tiered model strategy reduces cost by not routing every query to the most expensive model.
+Q13 — What Is Your Leadership and Mentorship Style?
+Topic tags: Leadership, Mentorship, Team Management, Cross-Functional, Platform Ownership, Stakeholder Management
+Platform Ownership Mindset
+Shiva's leadership style is grounded in platform ownership — treating work not as tasks to complete but as a product to be adopted, maintained, and grown.
+At Thomson Reuters: Led the AI Platform from development through broad organizational adoption, serving 200+ data scientists — requiring stakeholder management, onboarding, documentation, and change management alongside engineering.
+At Autodesk: Led AI inference service architecture across multiple enterprise-scale applications, coordinating with product teams to translate requirements into infrastructure decisions.
+At Atlassian: Led the GTM and support workflow rollout of CSM-Rovo — a cross-functional effort involving engineering, product, support operations, and go-to-market teams.
+Technical Leadership and Career Growth
+Progressed from AI Engineer to Senior AI Engineer at Thomson Reuters in under a year.
+At each company, moved from individual contributor work to leading platform-level services with org-wide impact.
+Innovation Leadership
+4x hackathon winner across team-based competitions — requires rapid prototyping, team coordination, and technical execution under time pressure.
+Demonstrates the ability to lead by example: generating ideas, building rapidly, and delivering results in competitive environments.
+Q14 — How Do You Handle Multi-Cloud ML Deployments?
+Topic tags: Multi-Cloud, AWS, Azure, GCP, SageMaker, AzureML, Vertex AI, LLM Serving, Bedrock
+Multi-Cloud Experience Overview
+Shiva has hands-on production experience across all three major clouds (AWS, Azure, GCP) for ML workloads — enabling him to operate and architect in any cloud environment without ramp-up.
+AWS (Amazon Web Services)
+SageMaker Studio — model development, experiment tracking, and managed Jupyter environments for 200+ data scientists at Thomson Reuters.
+SageMaker Pipelines — ML workflow orchestration for multi-step training and evaluation pipelines.
+AWS Bedrock — deployed and served LLaMA 2, LLaMA 3, Claude 3, and GPT-4 as managed LLM APIs.
+AWS Lambda, ECR, DynamoDB, S3, Kafka — event-driven inference, artifact storage, feature storage, and async pipeline messaging.
+Infrastructure managed via CloudFormation templates and Terraform.
+Microsoft Azure
+AzureML Studio — primary ML platform at Thomson Reuters and Autodesk. Used for model training, experiment management, and the AI Inference Service.
+Azure AI Studio — LLM deployment and evaluation environment.
+Azure OpenAI — direct API access to GPT models within Azure's compliance boundary.
+AKS — container orchestration for ML model serving (Document AI at EY, inference at Autodesk).
+Infrastructure managed via Terraform and Bicep templates with Azure Service Principal for IAM.
+GCP (Google Cloud Platform)
+GCP Vertex AI — integrated into the Thomson Reuters AI Platform as a third cloud option.
+Multi-Cloud Design Principles
+Abstraction layers: build internal API abstractions so teams interact with a unified interface regardless of which cloud is backing inference.
+IaC across all clouds: Terraform as the common language, with cloud-specific modules for AWS (CloudFormation) and Azure (Bicep).
+Model-agnostic LLM serving: at Thomson Reuters, LLaMA 2/3, Claude 3, and GPT-4 were served through a unified platform API, allowing model swaps without consumer-side changes.
+Q15 — What Are Your Career Goals and Growth Trajectory?
+Topic tags: Career, Goals, Growth, Trajectory, Ambition, Leadership, Future Plans
+Career Trajectory So Far
+EY GDS (2021-2022): Foundation — computer vision, model training, first production Kubernetes deployment. Intern to FTE in under a year.
+Thomson Reuters (2022-2024): Scale — built and led an AI Platform supporting 200+ users. AI Engineer to Senior AI Engineer in under a year.
+Autodesk (2024-2025): Depth — GPU optimization, GenAI inference architecture, agentic incident resolution. Senior AI/ML Engineer.
+Atlassian (2025-Present): Frontier — agentic AI at the cutting edge (LangGraph, MCP, GraphRAG, GPT-5.2, Gemini-3-Flash).
+Technical Goals
+Continue pushing the frontier of Agentic AI — multi-agent systems, and AI systems that autonomously improve their own retrieval and reasoning over time.
+Deepen expertise in AI safety and reliability for production agentic systems — hallucination detection, agent alignment, and robust failure handling at scale.
+Expand into AI product strategy: bridging ML engineering and product decision-making.
+Leadership Goals
+Move toward a Staff or Principal ML Engineer role — owning cross-org AI platform strategy.
+Build and lead high-performing ML engineering teams.
+Contribute to the AI engineering community through open source, writing, or conference talks.
+Q16 — What Are Your Strengths and Weaknesses?
+Topic tags: Self-Assessment, Strengths, Weaknesses, Growth Areas, Soft Skills, Self-Awareness
+Core Strengths
+End-to-end ML ownership: can go from model design to production deployment to monitoring without needing separate teams for each phase.
+Speed of delivery: 4x hackathon winner translates to rapid prototyping in production. Shipped CSM-Rovo and scaled to 10k+ conversations at Atlassian.
+Agentic AI depth: production-proven experience in LangGraph, MCP, GraphRAG, and hybrid RAG at enterprise scale.
+Multi-cloud fluency: AWS, Azure, and GCP experience means no ramp-up cost in any cloud environment.
+Quantified impact focus: consistently measures outcomes (45% manual reduction, 35% relevance improvement, 2.5x throughput, 30% cost reduction).
+Academic excellence: Gold Medalist, First Rank, Merit Scholarship — strong foundational rigor.
+Growth Areas
+Research breadth: strength is in applied production ML. Less exposure to cutting-edge academic research (publishing papers, novel architecture design from scratch). Compensates by rapidly applying frontier research (GraphRAG, MCP) in production.
+Formal people management: has led platforms, mentored engineers, and driven cross-functional rollouts, but hasn't held a formal engineering manager title with direct reports. This is the natural next step in his trajectory.
+Domain specialization depth: career spans document AI, MLOps platforms, GenAI, and agentic systems — breadth is a strength but means less depth in any single vertical compared to narrow domain specialists.
+Q17 — How Do You Stay Current with Rapidly Evolving AI?
+Topic tags: Learning, AI Trends, Continuous Development, Research, LLM Ecosystem
+Applied Learning Through Production
+The most effective way Shiva stays current is by working at companies at the frontier of AI application. Building production systems forces engagement with the latest tools because older approaches don't scale or perform adequately.
+Adopted LangGraph, MCP, and GraphRAG at Atlassian as they emerged — not yet mainstream when first implemented.
+Deployed GPT-5.2 and Gemini-3-Flash in production at Atlassian, staying at the forefront of model availability.
+Implemented ONNX and TFLite for cross-platform inference — responding to the industry shift toward edge AI.
+Hackathon Culture
+Participating in hackathons (4 wins across 2020-2021) trains rapid learning: understand a new technology, prototype with it, and deliver a working system in 24-48 hours.
+This habit of fast experimentation carries into production work — evaluating new tools quickly based on real evidence rather than hype.
+Academic Foundation
+MBA in Finance and Big Data Analytics provides an unusual lens — understanding both technical implementation and business/economic dimensions of AI decisions.
+Strong academic foundation (CGPA 9.26/10 CSE) means new concepts are absorbed faster because first principles are solid.
+Q18 — How Do You Work with Non-Technical Stakeholders?
+Topic tags: Communication, Stakeholders, Cross-Functional, GTM, Business Impact, Product Teams
+GTM and Support Workflow Rollout (Atlassian)
+Led the rollout of CSM-Rovo across Go-To-Market and support teams — translating AI capabilities into support team workflows and iterating based on non-technical user feedback.
+Success metric (10k+ AI-assisted conversations, 45% manual intervention reduction) was defined in business terms, not engineering terms.
+AI Platform Adoption (Thomson Reuters)
+Driving 200+ data scientists to adopt a new AI Platform required documentation, onboarding support, and communication of platform capabilities in terms users cared about.
+Led the platform from development to adoption — managing change, addressing resistance, and continuously improving based on user feedback.
+Translating Technical Decisions to Business Language
+GPU cost reduction at Autodesk (30%) was communicated as a direct infrastructure savings story — language that resonates with finance and leadership stakeholders.
+The MBA background provides an advantage here: Shiva can construct cost-benefit analyses, frame AI ROI arguments, and communicate trade-offs in business terms.
+Q19 — What Is Your Approach to RAG System Design?
+Topic tags: RAG, Retrieval Augmented Generation, VectorDB, LlamaIndex, GraphRAG, Chunking, Embeddings, Hybrid Retrieval
+RAG Design Philosophy
+Production RAG systems require careful design at every layer: document processing, chunking strategy, embedding model selection, retrieval architecture, re-ranking, and response generation. Each layer has significant quality impact.
+Document Processing and Chunking
+Chunk size and overlap must be tuned to the content type: small chunks for precise fact retrieval, larger chunks for contextual understanding. Overlap prevents context loss at chunk boundaries.
+Metadata enrichment: attach source, date, section, and entity tags to each chunk for filtered retrieval.
+Retrieval Architecture
+Dense retrieval (embedding-based): VectorDBs for semantic similarity search — backbone of RAG at Thomson Reuters and Atlassian.
+Hybrid retrieval: combine dense (semantics) with sparse retrieval (BM25/keyword) to handle both conceptual queries and exact-term lookups. Implemented via LlamaIndex at Atlassian, delivering 35% response relevance improvement.
+GraphRAG: for knowledge-graph-structured domains, retrieval traverses entity relationships rather than just finding similar text chunks. Used at Atlassian for guidance workflows where connected context is critical.
+Re-ranking and Context Management
+Initial retrieval casts a wide net (top-20 chunks); a re-ranker model then scores and reorders to select the top-5 for context injection.
+For agentic RAG (CSM-Rovo): use LangGraph checkpointing to maintain retrieval state across multi-turn conversations without re-retrieving on every turn.
+RAG Evaluation Metrics
+Retrieval: precision@k, recall@k, Mean Reciprocal Rank (MRR) — measured against golden query-document pairs.
+Generation: faithfulness (is the answer grounded in retrieved context?), relevance (does it answer the question?), completeness (are all required facts included?).
+Q20 — Tell Me About Your Educational Background
+Topic tags: Education, TIET, Thapar, BE, MBA, CGPA, Dual Degree, Finance, Big Data, Academic Excellence
+Dual Degree: BE + MBA at Thapar Institute
+Shiva completed a Dual Degree program at Thapar Institute of Engineering and Technology (TIET), Patiala — one of India's top engineering institutions.
+BE in Computer Science Engineering — CGPA: 9.26/10 (Gold Medalist performance)
+MBA in Finance and Big Data Analytics — CGPA: 8.91/10
+First Rank in Academic year at TIET for 2019-2020 and 2018-2019
+Merit Scholarship holder for 2018-2019 and 2019-2020
+Why the Dual Degree Matters
+Most ML engineers have either strong technical background or business context — rarely both. The BE+MBA combination gives Shiva the ability to bridge engineering depth with business and financial reasoning.
+MBA in Finance and Big Data Analytics is directly relevant to ML engineering: understanding data at scale, economic tradeoffs, and organizational dynamics directly informs how AI systems are designed, priced, and adopted.
+This is why Shiva consistently frames AI work in business terms: 30% cost reduction, 45% manual reduction, 10k+ conversations — not just technical metrics.
+Academic Achievement Context
+Gold Medalist across the dual degree signals sustained excellence over 4-5 years of combined engineering and business coursework.
+First Rank in consecutive academic years confirms consistency, not a single outlier performance.
+Q21 — Quick Reference: Key Numbers, Facts, and One-Liners
+Topic tags: Quick Reference, Numbers, Facts, Summary, RAG Retrieval
+This section is optimized for retrieval of specific facts, numbers, and concise answers to direct questions.
+Career Stats
+Total experience: approximately 5 years (April 2021 to Present)
+Companies: EY GDS, Thomson Reuters, Autodesk, Atlassian
+Current role: Machine Learning Engineer at Atlassian (June 2025 to Present)
+Email: thavani.shiva3@gmail.com | Phone: +91-7901913699
+LinkedIn: https://www.linkedin.com/in/shiva-thavani-916177167
+Key Impact Metrics
+45%+ reduction in manual support intervention (Atlassian — CSM-Rovo)
+35% improvement in AI response relevance (Atlassian — LlamaIndex hybrid retrieval)
+10,000+ AI-assisted resolved conversations (Atlassian — CSM-Rovo rollout)
+2.5x GPU throughput improvement (Autodesk — CUDA container optimization)
+30% GPU cost reduction (Autodesk — inference workload optimization)
+200+ data scientists and ML engineers supported (Thomson Reuters — AI Platform)
+90%+ object detection accuracy on enterprise documents (EY — Document AI)
+Education
+BE CSE CGPA: 9.26/10 | MBA Finance and Big Data Analytics CGPA: 8.91/10 — Thapar Institute
+Gold Medalist, First Rank (2018-19, 2019-20), Merit Scholarship (2018-19, 2019-20)
+Certifications
+AWS Certified Developer — Associate
+Hackathon Wins (4 total)
+Smart India Hackathon 2020 — Winner (Open Innovation)
+EY GDS Hackpions 2021 — 1st Prize (Intelligent Automation with AI)
+Bosch AI Hackathon 2021 — 1st Prize (Smart AI Robot)
+Xebia Xe-Thon 2021 — 1st Prize (Intelligent Hiring using AI)
+Primary Technologies
+Agentic AI: LangGraph, LangChain, MCP, GraphRAG, RAG, LlamaIndex, LangSmith
+LLMs: GPT-5.2, GPT-4, Claude 3, Gemini-3-Flash, LLaMA 2 and LLaMA 3
+Cloud: AWS (SageMaker, Bedrock, Lambda), Azure (AzureML, Azure AI Studio, AKS), GCP (Vertex AI)
+MLOps: MLflow, Kubeflow, Terraform, CloudFormation, Bicep, Docker, Kubernetes
+Languages: Python, SQL, C++, Golang, JavaScript, Kotlin, Shell Script
+Inference Runtimes: ONNX, TFLite, CUDA, FastAPI, Flask
+Document generated for RAG ingestion — Shiva Thavani AI/ML Profile Knowledge Base
+Each section is self-contained and optimized for semantic chunking and retrieval.

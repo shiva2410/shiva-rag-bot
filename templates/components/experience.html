@@ -1,0 +1,34 @@
+<section id="experience" class="section">
+  <div class="mx-auto max-w-6xl px-5 lg:px-8">
+    <div class="section-heading reveal">
+      <p class="eyebrow">Experience</p>
+      <h2>AI platforms across high-scale product teams.</h2>
+    </div>
+    <div class="timeline">
+      {% for item in portfolio.experience %}
+      <article class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="glass-card">
+          <div class="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
+            <div>
+              <h3 class="text-2xl font-bold text-slate-950">{{ item.company }}</h3>
+              <p class="mt-1 text-violet-600">{{ item.role }}</p>
+            </div>
+            <span class="rounded-full bg-slate-100 px-4 py-2 text-sm text-slate-600">{{ item.period }}</span>
+          </div>
+          <ul class="mt-5 space-y-3 text-slate-600">
+            {% for achievement in item.achievements %}
+            <li class="flex gap-3"><span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-violet-500"></span>{{ achievement }}</li>
+            {% endfor %}
+          </ul>
+          <div class="mt-5 flex flex-wrap gap-2">
+            {% for tech in item.tech %}
+            <span class="chip">{{ tech }}</span>
+            {% endfor %}
+          </div>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>

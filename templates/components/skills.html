@@ -1,0 +1,20 @@
+<section id="skills" class="section">
+  <div class="mx-auto max-w-7xl px-5 lg:px-8">
+    <div class="section-heading reveal">
+      <p class="eyebrow">Skills</p>
+      <h2>Full-stack AI delivery, from prompts to GPU clusters.</h2>
+    </div>
+    <div class="grid gap-5 md:grid-cols-2 xl:grid-cols-5">
+      {% for category, skills in portfolio.skills.items() %}
+      <div class="skill-card reveal">
+        <h3 class="text-xl font-bold text-slate-950">{{ category }}</h3>
+        <div class="mt-5 flex flex-wrap gap-2">
+          {% for skill in skills %}
+          <span class="chip">{{ skill }}</span>
+          {% endfor %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
