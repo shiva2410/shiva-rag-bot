@@ -60,8 +60,11 @@ app = FastAPI(
 )
 
 static_dir = BASE_DIR / "static"
-if static_dir.exists():
-    app.mount("/static", StaticFiles(directory=str(static_dir)), name="static")
+try:
+    if static_dir.exists():
+        app.mount("/static", StaticFiles(directory=str(static_dir)), name="static")
+except Exception as e:
+    print(f"Warning: Could not mount static files: {e}")
 
 templates = None
 templates_dir = BASE_DIR / "templates"
@@ -218,9 +221,17 @@ async def ask_resume(payload: AskRequest):
         headers={"X-Accel-Buffering": "no",   # disable nginx buffering
                  "Cache-Control": "no-cache"},
     )
-
+    
+@app.get("/debug")
+async def debug():
+    return {
+        "base_dir": str(BASE_DIR),
+        "static_exists": (BASE_DIR / "static").exists(),
+        "templates_exists": (BASE_DIR / "templates").exists(),
+        "knowledge_exists": (BASE_DIR / "data" / "shiva_knowledge_base.txt").exists(),
+    }
 
 # ---------------------------------------------------------------------------
 # 9. Mangum handler for Vercel serverless
 # ---------------------------------------------------------------------------
-handler = Mangum(app)
+handler = Mangum(app, lifespan="off")
