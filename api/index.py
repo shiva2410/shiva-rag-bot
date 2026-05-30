@@ -201,8 +201,9 @@ async def home(request: Request):
     if not templates:
         return JSONResponse(status_code=500, content={"error": "Templates not found."})
     return templates.TemplateResponse(
-        "index.html",
-        {"request": request, "portfolio": PORTFOLIO, "seo": PORTFOLIO.get("seo", {})},
+        request=request,
+        name="index.html",
+        context={"portfolio": PORTFOLIO, "seo": PORTFOLIO.get("seo", {})},
     )
 
 
