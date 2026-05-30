@@ -1,14 +1,19 @@
 {
-  "functions": {
-    "api/index.py": {
-      "maxDuration": 60,
-      "includeFiles": "data/**|templates/**|static/**"
-    }
-  },
-  "rewrites": [
+  "version": 2,
+  "builds": [
     {
-      "source": "/(.*)",
-      "destination": "api/*.py"
+      "src": "api/index.py",
+      "use": "@vercel/python",
+      "config": {
+        "maxLambdaSize": "15mb",
+        "includeFiles": "data/**|templates/**|static/**"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/api/index"
     }
   ]
 }
