@@ -160,7 +160,7 @@ Knowledge base:
         return response.text or ""
 
     try:
-        loop = asyncio.get_event_loop()
+        loop = asyncio.get_running_loop()
         full_text = await loop.run_in_executor(None, _call_gemini)
         if full_text.strip():
             yield json.dumps({"type": "content", "text": full_text}) + "\n"
