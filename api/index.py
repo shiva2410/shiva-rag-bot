@@ -3,6 +3,7 @@ import sys
 import json
 import asyncio
 from pathlib import Path
+from functools import lru_cache
 from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import JSONResponse, FileResponse, StreamingResponse
@@ -13,15 +14,25 @@ from pydantic_settings import BaseSettings
 from mangum import Mangum
 
 # ---------------------------------------------------------------------------
-# 1. Environment – load .env for local dev before reading any env vars
+# Load .env for local development (no-op on Vercel where env vars are injected
+# directly into the process environment at runtime).
 # ---------------------------------------------------------------------------
 load_dotenv()
 
-if not os.getenv("GEMINI_API_KEY"):
-    raise RuntimeError("GEMINI_API_KEY is not set")
+# ---------------------------------------------------------------------------
+# Paths — safe to compute at import time (no env vars needed).
+# BASE_DIR = project root (parent of api/)
+# ---------------------------------------------------------------------------
+BASE_DIR = Path(__file__).resolve().parent.parent
+if str(BASE_DIR) not in sys.path:
+    sys.path.insert(0, str(BASE_DIR))
 
 # ---------------------------------------------------------------------------
-# 2. Settings (validated at startup by pydantic-settings)
+# Settings — defined as a class but NOT instantiated at import time.
+# On Vercel, @vercel/python imports this module during the BUILD phase to find
+# `handler`. Build-time env vars are NOT the same as runtime env vars.
+# Instantiating Settings() here would raise ValidationError and crash the
+# import → no `handler` found → no function deployed → 404 forever.
 # ---------------------------------------------------------------------------
 class Settings(BaseSettings):
     gemini_api_key: str = Field(..., validation_alias="GEMINI_API_KEY")
@@ -32,26 +43,30 @@ class Settings(BaseSettings):
         env_file_encoding = "utf-8"
         extra = "ignore"
 
-settings = Settings()
+@lru_cache(maxsize=1)
+def get_settings() -> Settings:
+    """Lazy singleton — first call initialises and validates env vars."""
+    return Settings()
 
 # ---------------------------------------------------------------------------
-# 3. Gemini client  (google-genai package — same as original app.py)
+# Gemini client — also lazy; depends on settings.
+# google imports are deferred inside the function for the same reason.
 # ---------------------------------------------------------------------------
-from google import genai
-from google.genai import types as genai_types
-from google.genai.errors import APIError
+@lru_cache(maxsize=1)
+def get_gemini_client():
+    from google import genai
+    return genai.Client(api_key=get_settings().gemini_api_key)
 
-gemini_client = genai.Client(api_key=settings.gemini_api_key)
+def get_genai_types():
+    from google.genai import types as genai_types
+    return genai_types
+
+def get_api_error_class():
+    from google.genai.errors import APIError
+    return APIError
 
 # ---------------------------------------------------------------------------
-# 4. Paths – BASE_DIR is the project root (parent of api/)
-# ---------------------------------------------------------------------------
-BASE_DIR = Path(__file__).resolve().parent.parent
-if str(BASE_DIR) not in sys.path:
-    sys.path.insert(0, str(BASE_DIR))
-
-# ---------------------------------------------------------------------------
-# 5. FastAPI app + mounts
+# FastAPI app — safe to create at import time (no env vars needed here).
 # ---------------------------------------------------------------------------
 app = FastAPI(
     title="Shiva Thavani | AI Engineer Portfolio",
@@ -77,7 +92,7 @@ except ImportError:
     PORTFOLIO = {}
 
 # ---------------------------------------------------------------------------
-# 6. Streaming RAG generator
+# Streaming RAG generator
 # ---------------------------------------------------------------------------
 async def response_generator(question: str):
     """
@@ -88,7 +103,6 @@ async def response_generator(question: str):
     """
     q_lower = question.lower()
 
-    # Build context-aware filler sequence
     fillers = ["Searching Shiva's career graph..."]
 
     if any(x in q_lower for x in ["atlassian", "autodesk", "thomson", "reuters",
@@ -108,12 +122,10 @@ async def response_generator(question: str):
     fillers.append("This answer is RAG-grounded, not hallucinated...")
     fillers.append("Found the relevant experience. Composing answer...")
 
-    # --- emit fillers while Gemini warms up ---
     for filler in fillers:
         yield json.dumps({"type": "status", "text": filler}) + "\n"
         await asyncio.sleep(0.45)
 
-    # --- load knowledge base ---
     knowledge_path = BASE_DIR / "data" / "shiva_knowledge_base.txt"
     if not knowledge_path.exists():
         yield json.dumps({"type": "error",
@@ -148,20 +160,18 @@ Knowledge base:
 {knowledge}
 """
 
-    # ------------------------------------------------------------------
-    # IMPORTANT: generate_content() is a blocking synchronous call.
-    # Running it in a thread via run_in_executor keeps the event loop
-    # free so uvicorn can flush the status lines above to the browser
-    # while Gemini is processing.
-    # ------------------------------------------------------------------
     def _call_gemini() -> str:
-        response = gemini_client.models.generate_content(
+        settings = get_settings()
+        client = get_gemini_client()
+        genai_types = get_genai_types()
+        response = client.models.generate_content(
             model=settings.gemini_model,
             contents=prompt,
             config=genai_types.GenerateContentConfig(temperature=0.35),
         )
         return response.text or ""
 
+    APIError = get_api_error_class()
     try:
         loop = asyncio.get_running_loop()
         full_text = await loop.run_in_executor(None, _call_gemini)
@@ -177,14 +187,14 @@ Knowledge base:
 
 
 # ---------------------------------------------------------------------------
-# 7. Request model
+# Request model
 # ---------------------------------------------------------------------------
 class AskRequest(BaseModel):
     question: str = Field(..., min_length=1)
 
 
 # ---------------------------------------------------------------------------
-# 8. Routes
+# Routes
 # ---------------------------------------------------------------------------
 @app.get("/")
 async def home(request: Request):
@@ -207,7 +217,8 @@ async def resume():
 
 @app.get("/health")
 async def health():
-    return {"status": "ok", "service": "portfolio", "model": settings.gemini_model}
+    # get_settings() is safe here — only called at request time on Vercel
+    return {"status": "ok", "service": "portfolio", "model": get_settings().gemini_model}
 
 
 @app.post("/api/ask")
@@ -218,10 +229,11 @@ async def ask_resume(payload: AskRequest):
     return StreamingResponse(
         response_generator(question),
         media_type="text/plain",
-        headers={"X-Accel-Buffering": "no",   # disable nginx buffering
+        headers={"X-Accel-Buffering": "no",
                  "Cache-Control": "no-cache"},
     )
-    
+
+
 @app.get("/debug")
 async def debug():
     return {
@@ -229,13 +241,16 @@ async def debug():
         "static_exists": (BASE_DIR / "static").exists(),
         "templates_exists": (BASE_DIR / "templates").exists(),
         "knowledge_exists": (BASE_DIR / "data" / "shiva_knowledge_base.txt").exists(),
+        "gemini_api_key_set": bool(os.getenv("GEMINI_API_KEY")),
     }
+
 
 # ---------------------------------------------------------------------------
 # Vercel entrypoint
-# @vercel/python requires a `handler` variable to register the serverless
-# function in Vercel's build output. Without it the function is never created.
-# Mangum wraps the FastAPI ASGI app; lifespan="off" skips startup/shutdown
-# events that don't apply in a serverless context.
+#
+# @vercel/python scans this module at BUILD time to find `handler`.
+# Everything above this line must be importable with NO env vars present
+# (Vercel Dashboard env vars are injected at runtime, not build time).
+# Mangum converts Vercel's Lambda-style invocation into ASGI for FastAPI.
 # ---------------------------------------------------------------------------
 handler = Mangum(app, lifespan="off")
