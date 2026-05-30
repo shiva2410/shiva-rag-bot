@@ -84,8 +84,13 @@ function renderMarkdown(text) {
 async function askResume(question) {
   if (!question.trim()) return;
 
+  const panel = document.getElementById("assistant-panel");
+  if (panel) {
+    panel.style.display = "block";
+  }
+
   // Reset the answer box to a neutral loading message — no black box yet
-  answerBox.innerHTML = `<p class="loading-hint" style="color:#94a3b8;font-family:'JetBrains Mono',monospace;font-size:0.82rem;">⬡ Initialising Gemini assistant...</p>`;
+  answerBox.innerHTML = `<p class="loading-hint" style="color:#94a3b8;font-family:'JetBrains Mono',monospace;font-size:0.82rem;">⬡ Initialising AI assistant...</p>`;
   answerBox.classList.add("loading");
 
   let tracker = null;       // created lazily on first status message

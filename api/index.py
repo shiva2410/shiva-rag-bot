@@ -70,7 +70,7 @@ def get_api_error_class():
 # ---------------------------------------------------------------------------
 app = FastAPI(
     title="Shiva Thavani | AI Engineer Portfolio",
-    description="Vercel-deployed FastAPI app with Gemini-powered RAG assistant.",
+    description="Vercel-deployed FastAPI app with AI-powered RAG assistant.",
     version="1.0.0",
 )
 
@@ -179,9 +179,9 @@ Knowledge base:
             yield json.dumps({"type": "content", "text": full_text}) + "\n"
         else:
             yield json.dumps({"type": "error",
-                              "text": "Gemini returned an empty response."}) + "\n"
+                              "text": "AI assistant returned an empty response."}) + "\n"
     except APIError as exc:
-        yield json.dumps({"type": "error", "text": f"Gemini API error: {exc}"}) + "\n"
+        yield json.dumps({"type": "error", "text": f"AI assistant API error: {exc}"}) + "\n"
     except Exception as exc:
         yield json.dumps({"type": "error", "text": f"Unexpected error: {exc}"}) + "\n"
 
