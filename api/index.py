@@ -10,7 +10,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from pydantic import BaseModel, Field
 from pydantic_settings import BaseSettings
-# Mangum is NOT used — Vercel's @vercel/python serves ASGI apps (FastAPI) directly via uvicorn
+from mangum import Mangum
 
 # ---------------------------------------------------------------------------
 # 1. Environment – load .env for local dev before reading any env vars
@@ -232,7 +232,10 @@ async def debug():
     }
 
 # ---------------------------------------------------------------------------
-# Vercel entrypoint — @vercel/python detects `app` as an ASGI app and
-# serves it directly with uvicorn. No Mangum/Lambda adapter needed.
+# Vercel entrypoint
+# @vercel/python requires a `handler` variable to register the serverless
+# function in Vercel's build output. Without it the function is never created.
+# Mangum wraps the FastAPI ASGI app; lifespan="off" skips startup/shutdown
+# events that don't apply in a serverless context.
 # ---------------------------------------------------------------------------
-# `app` is already defined above as the FastAPI instance.
+handler = Mangum(app, lifespan="off")
