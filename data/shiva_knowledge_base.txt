@@ -87,7 +87,7 @@ Tenure: June 2025 – Present    Role: Machine Learning Engineer
 This is the flagship project. CSM-Rovo is an AI agent purpose-built for Atlassian's Customer Success Management (CSM) and support workflows.
 Architecture: Built on LangGraph for stateful, multi-step agent reasoning. LangGraph allows the agent to pause, branch, and resume workflows based on context — critical for complex support escalations.
 Tool Orchestration: Used Model Context Protocol (MCP) to give the agent dynamic access to external tools (Jira APIs, Confluence knowledge base, customer account data) without hardcoding tool logic into the agent.
-Hybrid Orchestration + Semantic Retrieval: Implemented LlamaIndex-based semantic query pipelines to retrieve the most contextually relevant knowledge base content. This hybrid approach (structured + semantic retrieval) improved response relevance by 35%.
+Hybrid Orchestration + Semantic Retrieval: Implemented hybrid orchestration and semantic query pipelines using LlamaIndex, A/B tested retrieval strategies, improving response relevance by 35%.
 Knowledge Graph Retrieval: Developed GraphRAG-based guidance workflows — the agent traverses a knowledge graph to retrieve interconnected context, not just flat document chunks. Uses GPT-5.2 and Gemini-3-Flash as backbone models.
 Outcome: Reduced manual intervention in support workflows by 45%+ and enabled 10,000+ AI-assisted resolved conversations.
 2. Cross-Platform Model Optimization
