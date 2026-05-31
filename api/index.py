@@ -362,6 +362,36 @@ class AskRequest(BaseModel):
 # ---------------------------------------------------------------------------
 @app.get("/")
 async def home(request: Request):
+    try:
+        import urllib.parse
+        country = request.headers.get("x-vercel-ip-country", "Unknown Country")
+        region = request.headers.get("x-vercel-ip-country-region", "")
+        city_encoded = request.headers.get("x-vercel-ip-city", "")
+        city = urllib.parse.unquote(city_encoded) if city_encoded else "Unknown City"
+        location = f"{city}, {region} ({country})" if region else f"{city} ({country})"
+        
+        referer = request.headers.get("referer", "")
+        source = "Direct / Direct Input"
+        if referer:
+            ref_lower = referer.lower()
+            if "linkedin.com" in ref_lower:
+                source = "LinkedIn"
+            elif "medium.com" in ref_lower:
+                source = "Medium"
+            elif "google.com" in ref_lower:
+                source = "Google Search"
+            elif "github.com" in ref_lower:
+                source = "GitHub"
+            elif "t.co" in ref_lower or "twitter.com" in ref_lower or "x.com" in ref_lower:
+                source = "X / Twitter"
+            else:
+                source = referer
+
+        user_agent = request.headers.get("user-agent", "Unknown Browser")
+        print(f"[VISITOR LOG] 🚀 New Visit | Location: {location} | Source: {source} | User-Agent: {user_agent}")
+    except Exception as e:
+        print(f"[VISITOR LOG ERROR] Failed to log visitor: {e}")
+
     if not templates:
         return JSONResponse(status_code=500, content={"error": "Templates not found."})
     return templates.TemplateResponse(
@@ -419,10 +449,23 @@ async def health():
 
 
 @app.post("/api/ask")
-async def ask_resume(payload: AskRequest):
+async def ask_resume(payload: AskRequest, request: Request):
     question = payload.question.strip()
     if not question:
         raise HTTPException(status_code=400, detail="Question cannot be empty.")
+        
+    try:
+        import urllib.parse
+        country = request.headers.get("x-vercel-ip-country", "Unknown Country")
+        region = request.headers.get("x-vercel-ip-country-region", "")
+        city_encoded = request.headers.get("x-vercel-ip-city", "")
+        city = urllib.parse.unquote(city_encoded) if city_encoded else "Unknown City"
+        location = f"{city}, {region} ({country})" if region else f"{city} ({country})"
+        
+        print(f"[QUERY LOG] 💬 AI Query | Location: {location} | Query: \"{question}\"")
+    except Exception as e:
+        print(f"[QUERY LOG ERROR] Failed to log query: {e}")
+
     return StreamingResponse(
         response_generator(question),
         media_type="text/plain",
