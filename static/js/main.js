@@ -337,6 +337,15 @@ document.querySelectorAll(".suggestion-chip").forEach((button) => {
     const question = button.dataset.question || button.textContent;
     askInput.value = question;
     const query = question.trim().toLowerCase();
+    
+    // Auto-scroll up to the search bar beautifully
+    const searchSection = document.querySelector(".search-shell");
+    if (searchSection) {
+      const rect = searchSection.getBoundingClientRect();
+      const targetY = window.scrollY + rect.top - 120;
+      window.scrollTo({ top: targetY, behavior: "smooth" });
+    }
+
     if (query === "/sudo dev" || query === "/matrix" || query === "/terminal" || query === "/help" || query === "/dev") {
       triggerTerminalConsole();
     } else {
@@ -354,3 +363,88 @@ window.addEventListener("scroll", () => {
 updateNavbar();
 setActiveLink();
 revealOnScroll();
+
+/* ==========================================================================
+   INTERACTIVE PORTFOLIO EASTER EGGS (EE 5 & EE 12)
+   ========================================================================== */
+
+  // --- EASTER EGG 5: Hover $500K+ Stat Card 3 Times — Card Flip ---
+  try {
+    const cards = document.querySelectorAll('.search-metric');
+    let statCard = null;
+    cards.forEach(card => {
+      const strong = card.querySelector('strong');
+      if (strong && strong.textContent.includes('$500K+')) {
+        statCard = card;
+      }
+    });
+
+    if (statCard) {
+      statCard.style.perspective = "1000px";
+      statCard.style.overflow = "visible";
+      
+      const originalHtml = statCard.innerHTML;
+      statCard.innerHTML = `
+        <div class="flipper-inner" style="position: relative; width: 100%; height: 100%; transition: transform 0.8s; transform-style: preserve-3d; min-height: 100px;">
+          <div class="flipper-front" style="position: absolute; inset: 0; width: 100%; height: 100%; backface-visibility: hidden; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+            ${originalHtml}
+          </div>
+          <div class="flipper-back" style="position: absolute; inset: 0; width: 100%; height: 100%; backface-visibility: hidden; transform: rotateY(180deg); display: flex; flex-direction: column; justify-content: center; align-items: center; background: #090d16; border: 1px solid #f59e0b; border-radius: inherit; padding: 0.5rem; text-align: center;">
+            <p style="font-family:'JetBrains Mono',monospace; font-size: 0.68rem; color:#f59e0b; font-weight: bold; margin-bottom:0.25rem;">🍵 Chai Metric:</p>
+            <p style="font-family:'JetBrains Mono',monospace; font-size: 0.65rem; color:#94a3b8; line-height:1.25;">For context: that's roughly 1,666,666 cups of chai. Shiva chose ML instead. 🍵</p>
+          </div>
+        </div>
+      `;
+      
+      const inner = statCard.querySelector('.flipper-inner');
+      let hoverCount = 0;
+      statCard.addEventListener('mouseenter', () => {
+        hoverCount++;
+        if (hoverCount === 3) {
+          inner.style.transform = "rotateY(180deg)";
+          setTimeout(() => {
+            inner.style.transform = "rotateY(0deg)";
+            hoverCount = 0; // reset
+          }, 3000);
+        }
+      });
+    }
+  } catch (err) {
+    console.error("Easter Egg 5 failed:", err);
+  }
+
+  // --- EASTER EGG 12: Click "ask me anything" Subheading ---
+  try {
+    const subheading = document.querySelector("#home p.font-mono");
+    if (subheading) {
+      subheading.style.cursor = "pointer";
+      subheading.addEventListener("click", () => {
+        const searchSection = document.querySelector(".search-shell");
+        if (searchSection) {
+          const rect = searchSection.getBoundingClientRect();
+          const targetY = window.scrollY + rect.top - 120;
+          window.scrollTo({ top: targetY, behavior: "smooth" });
+        }
+        const phrase = "Why should I hire Shiva?";
+        if (askInput) {
+          askInput.value = "";
+          askInput.focus();
+          let idx = 0;
+          const typeNextChar = () => {
+            if (idx < phrase.length) {
+              askInput.value += phrase[idx];
+              idx++;
+              setTimeout(typeNextChar, 40);
+            } else {
+              setTimeout(() => {
+                askForm?.dispatchEvent(new Event("submit"));
+              }, 600);
+            }
+          };
+          setTimeout(typeNextChar, 500);
+        }
+      });
+    }
+  } catch (err) {
+    console.error("Easter Egg 12 failed:", err);
+  }
