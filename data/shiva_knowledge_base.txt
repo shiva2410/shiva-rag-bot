@@ -374,13 +374,29 @@ Current role: Machine Learning Engineer at Atlassian (June 2025 to Present)
 Email: thavani.shiva3@gmail.com | Phone: +91-7901913699
 LinkedIn: https://www.linkedin.com/in/shiva-thavani-916177167
 Key Impact Metrics
-45%+ reduction in manual support intervention (Atlassian — CSM-Rovo)
-35% improvement in AI response relevance (Atlassian — LlamaIndex hybrid retrieval)
-10,000+ AI-assisted resolved conversations (Atlassian — CSM-Rovo rollout)
-2.5x GPU throughput improvement (Autodesk — CUDA container optimization)
-30% GPU cost reduction (Autodesk — inference workload optimization)
-200+ data scientists and ML engineers supported (Thomson Reuters — AI Platform)
-90%+ object detection accuracy on enterprise documents (EY — Document AI)
+- 5 years of end-to-end ML experience
+- 4 companies across 3 major cloud platforms (AWS + Azure + GCP)
+- 15+ production AI systems shipped
+- 10+ programming languages and frameworks
+- 4x hackathon winner (0 losses)
+- ~$500K+ in GPU/infrastructure costs optimized (representing 30% of enterprise GPU spend)
+- ~40% reduction in mean time to resolution (MTTR) via CSM-Rovo agentic incident workflows
+- 4 core support/engineering workflows automated via CSM-Rovo integration at Atlassian
+- 2 frontier LLMs integrated (GPT-5.2 + Gemini-3-Flash) utilizing 1M+ token context windows via GraphRAG pipelines
+- 5+ GenAI models deployed across Atlassian product suite
+- 3 MLOps tools orchestrated (Terraform + MLflow + Kubeflow)
+- ~40% reduction in deployment time via IaC Terraform automation
+- 4 enterprise applications served by AI Inference Service
+- 4 LLMs deployed in production (LLaMA2, LLaMA3, Claude3, GPT-4)
+- 8+ AWS/Azure services integrated into Thomson Reuters AI Platform
+- Orchestrated 8+ AWS/Azure cloud services to streamline production-grade LLM deployments across the organization
+- 2 years of platform ownership — from development to full organization adoption
+- 1 year intern to FTE conversion validating delivery quality
+- 2 deployment environments (Docker + AKS)
+- ~10x faster document processing vs manual review with 90%+ extraction accuracy
+- ~3 AI models deployed cross-platform (ONNX + TFLite)
+- 200+ data scientists and ML engineers supported on enterprise MLOps platform
+- 10,000+ AI-assisted resolved conversations enabled
 Education
 BE CSE CGPA: 9.26/10 | MBA Finance and Big Data Analytics CGPA: 8.91/10 — Thapar Institute
 Gold Medalist, First Rank (2018-19, 2019-20), Merit Scholarship (2018-19, 2019-20)

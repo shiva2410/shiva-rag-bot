@@ -7,11 +7,71 @@
   <meta name="description" content="{{ seo.description }}">
   <meta name="keywords" content="{{ seo.keywords }}">
   <meta name="author" content="{{ portfolio.profile.name }}">
+  <link rel="canonical" href="https://shiva-rag-bot.vercel.app/">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://shiva-rag-bot.vercel.app/">
   <meta property="og:title" content="{{ seo.title }}">
   <meta property="og:description" content="{{ seo.description }}">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="{{ seo.url }}">
+  <meta property="og:image" content="https://shiva-rag-bot.vercel.app/static/images/profile.png">
+  <meta property="og:site_name" content="Shiva Thavani Portfolio">
+
+  <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://shiva-rag-bot.vercel.app/">
+  <meta name="twitter:title" content="{{ seo.title }}">
+  <meta name="twitter:description" content="{{ seo.description }}">
+  <meta name="twitter:image" content="https://shiva-rag-bot.vercel.app/static/images/profile.png">
+
+  <!-- Structured Data (JSON-LD) - Person Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Shiva Thavani",
+    "jobTitle": "Machine Learning Engineer",
+    "url": "https://shiva-rag-bot.vercel.app/",
+    "sameAs": [
+      "https://www.linkedin.com/in/shiva-thavani-916177167",
+      "https://github.com/shiva2410"
+    ],
+    "knowsAbout": [
+      "GenAI",
+      "LangGraph",
+      "GraphRAG",
+      "LLMOps",
+      "MLOps",
+      "CUDA",
+      "Kubernetes",
+      "AzureML",
+      "RAG",
+      "OpenAI",
+      "Computer Vision",
+      "Deep Learning",
+      "TensorFlow"
+    ],
+    "worksFor": [
+      {
+        "@type": "Organization",
+        "name": "Atlassian"
+      },
+      {
+        "@type": "Organization",
+        "name": "Autodesk"
+      },
+      {
+        "@type": "Organization",
+        "name": "Thomson Reuters"
+      },
+      {
+        "@type": "Organization",
+        "name": "EY"
+      }
+    ]
+  }
+  </script>
+
   <link rel="icon" type="image/svg+xml" href="{{ url_for('static', path='images/favicon.svg') }}">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>

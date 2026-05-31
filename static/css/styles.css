@@ -658,3 +658,65 @@ footer {
   background: linear-gradient(135deg, #4285f4, #8b5cf6);
 }
 
+
+/* ==========================================================================
+   EASTER EGGS STYLING
+   ========================================================================== */
+
+/* Antigravity floating elements mode */
+body.antigravity-active {
+  perspective: 1000px;
+}
+body.antigravity-active .glass-card,
+body.antigravity-active .project-card,
+body.antigravity-active .timeline-card,
+body.antigravity-active .skill-badge {
+  animation: floatBobbing var(--float-duration, 5s) ease-in-out infinite alternate;
+  transition: transform 0.5s ease-out;
+}
+@keyframes floatBobbing {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(0.5deg);
+  }
+  100% {
+    transform: translateY(8px) rotate(-0.5deg);
+  }
+}
+
+/* Hacker Dev Mode Console Terminal styling */
+.terminal-console {
+  background: #090d16 !important;
+  color: #38bdf8 !important;
+  font-family: 'JetBrains Mono', monospace !important;
+  padding: 1.5rem !important;
+  border-radius: 18px !important;
+  border: 1px solid #0284c7 !important;
+  box-shadow: 0 0 20px rgba(14, 165, 233, 0.25) !important;
+  line-height: 1.6 !important;
+}
+.terminal-console p {
+  color: #38bdf8 !important;
+  font-size: 0.875rem !important;
+  margin-bottom: 0.4rem !important;
+  font-family: 'JetBrains Mono', monospace !important;
+}
+.terminal-console .terminal-green {
+  color: #4ade80 !important;
+}
+.terminal-console .terminal-yellow {
+  color: #facc15 !important;
+}
+.terminal-console .terminal-white {
+  color: #f8fafc !important;
+}
+.terminal-blink::after {
+  content: '▉';
+  animation: cursorBlink 1s step-start infinite;
+}
+@keyframes cursorBlink {
+  50% { opacity: 0; }
+}
+

@@ -8,11 +8,21 @@
       {% for project in portfolio.projects %}
       <article class="project-card reveal">
         {% if project.image %}
-        <img src="{{ url_for('static', path='images/' ~ project.image) }}" alt="{{ project.title }}" class="project-image">
+        <img src="{{ url_for('static', path='images/' ~ project.image) }}" alt="{{ project.title }} - Shiva Thavani AI Project" class="project-image" loading="lazy">
         {% endif %}
         <div class="flex items-start justify-between gap-4">
-          <h3 class="text-2xl font-semibold text-slate-950">{{ project.title }}</h3>
-          <span class="external-arrow">↗</span>
+          <h3 class="text-2xl font-semibold text-slate-950">
+            {% if project.link %}
+            <a href="{{ project.link }}" target="_blank" rel="noopener" class="hover:text-indigo-600 transition">
+              {{ project.title }}
+            </a>
+            {% else %}
+            {{ project.title }}
+            {% endif %}
+          </h3>
+          {% if project.link %}
+          <a href="{{ project.link }}" target="_blank" rel="noopener" class="external-arrow hover:bg-slate-100 transition" aria-label="View project link">↗</a>
+          {% endif %}
         </div>
         <p class="mt-4 leading-7 text-slate-600">{{ project.description }}</p>
         <div class="mt-6 grid gap-3 sm:grid-cols-2">

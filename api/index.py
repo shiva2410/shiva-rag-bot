@@ -1,11 +1,12 @@
 import os
 import sys
 import json
+import random
 import asyncio
 from pathlib import Path
 from functools import lru_cache
 from dotenv import load_dotenv
-from fastapi import FastAPI, HTTPException, Request
+from fastapi import FastAPI, HTTPException, Request, Response
 from fastapi.responses import JSONResponse, FileResponse, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
@@ -92,6 +93,122 @@ except ImportError:
     PORTFOLIO = {}
 
 # ---------------------------------------------------------------------------
+# ---------------------------------------------------------------------------
+# Global database of dynamic loading fillers (100 variants to prevent repetition)
+# ---------------------------------------------------------------------------
+FILLERS = [
+    # ── PERSONAL / PERSONALITY (1-25) ──────────────────────────────
+    "Flipping through Shiva's career pages...",
+    "Let me check what Shiva actually shipped...",
+    "Consulting the source of truth...",
+    "Asking the guy who won 4 hackathons...",
+    "Pulling from a career built across 4 companies...",
+    "Tracing the journey from EY to Atlassian...",
+    "5 years of ML work, finding the right chapter...",
+    "Checking what the Gold Medalist has to say...",
+    "Let me find the most relevant chapter...",
+    "Shiva's done a lot here, fetching the right thread...",
+    "Cross-referencing roles, projects and impact metrics...",
+    "Digging into the Atlassian chapter...",
+    "Pulling this from 5 years of production ML...",
+    "One sec — there's a lot to unpack here...",
+    "This one spans multiple roles, fetching...",
+    "Searching across 4 companies worth of experience...",
+    "Navigating the career timeline...",
+    "Let me find the chapter where Shiva crushed it...",
+    "Connecting the dots across roles...",
+    "Fetching from someone who's actually shipped this stuff...",
+    "Checking Shiva's track record on this...",
+    "Pulling context from a guy who's been in the trenches...",
+    "The answer is in here somewhere, hold on...",
+    "Retrieving from the ML engineer who's done this for real...",
+    "Let me check what actually happened here...",
+
+    # ── TECHNICAL / RAG (26-55) ────────────────────────────────────
+    "Embedding your query into vector space...",
+    "Semantic search across career context...",
+    "Fetching relevant chunks from knowledge base...",
+    "Re-ranking retrieved passages...",
+    "Grounding response in resume context...",
+    "Running RAG pipeline on 5 years of experience...",
+    "Knowledge graph traversal in progress...",
+    "Top match found. Synthesizing answer...",
+    "Dense retrieval complete. Re-ranking now...",
+    "Scanning career vectors... strong signal found...",
+    "Context window loaded. Generating response...",
+    "Similarity search complete. Composing answer...",
+    "Hybrid retrieval engaged...",
+    "Fetching top-k chunks from career embeddings...",
+    "Cross-encoder re-ranking in progress...",
+    "Retrieving from semantic index...",
+    "Query understood. Searching knowledge base...",
+    "Context retrieved. Grounding response now...",
+    "Running inference on retrieved context...",
+    "Chunk relevance scored. Generating answer...",
+    "Vector similarity > 0.95. Proceeding...",
+    "LLM context window populated. Thinking...",
+    "RAG pipeline complete. Composing response...",
+    "Knowledge base indexed. Fetching answer...",
+    "Retrieval complete. No hallucinations, promise...",
+    "Passage scores computed. Top match loaded...",
+    "Document chunks ranked. Assembling answer...",
+    "Semantic similarity check complete...",
+    "Context compression applied. Generating...",
+    "Attention heads focused on your query...",
+
+    # ── HUMOR (56-75) ──────────────────────────────────────────────
+    "Asking Shiva so you don't have to...",
+    "Fewer hallucinations than your average LLM, promise...",
+    "This is faster than a LinkedIn stalk...",
+    "No recruiters were harmed in fetching this answer...",
+    "Shiva's resume is big. Give me a moment...",
+    "Retrieving... (Shiva has done a lot, okay?)...",
+    "Not making this up — actually checking the context...",
+    "One moment while I out-Google the recruiter...",
+    "Hold on, even GPT-5 needs a second for this...",
+    "Loading career highlights. There are many...",
+    "Consulting the world's most specific knowledge base...",
+    "RAG-ing through the resume so you don't have to...",
+    "Checking if Shiva actually shipped this or just added it to LinkedIn...",
+    "Spoiler: he shipped it...",
+    "This answer is grounded, not vibed...",
+    "Less hallucination, more citation...",
+    "Finding the needle in a very impressive haystack...",
+    "Brb, reading 5 years of career history...",
+    "Loading... (Shiva's career is not a short read)...",
+    "Fact-checking against the actual resume...",
+
+    # ── IMPACT / METRICS FLAVORED (76-88) ─────────────────────────
+    "Retrieving from the engineer who cut GPU costs by 30%...",
+    "Fetching from the guy who hit 2.5x GPU throughput...",
+    "Pulling from 10,000+ AI-assisted conversations worth of context...",
+    "Consulting the architect of CSM-Rovo...",
+    "Checking the record of the guy who reduced manual work by 45%...",
+    "Pulling from the engineer who supported 200+ data scientists...",
+    "Retrieving from someone with 90%+ accuracy on document AI...",
+    "Fetching from the 4x hackathon winner...",
+    "Loading context from the Gold Medalist...",
+    "Asking the engineer with real production LLM deployments...",
+    "Retrieving from the guy who shipped agentic AI before it was cool...",
+    "Consulting 5 years of quantified impact...",
+    "Pulling from a career with actual numbers, not just buzzwords...",
+
+    # ── MIXED / HYBRID (89-100) ────────────────────────────────────
+    "Pulling context from 4 companies, 5 years, 0 fluff...",
+    "Found the relevant experience. Composing answer...",
+    "This answer is RAG-grounded, not hallucinated...",
+    "Fetching from the knowledge base, not thin air...",
+    "Scanning career graph... strong signal detected...",
+    "Cross-referencing Atlassian, Autodesk, Thomson Reuters, EY...",
+    "Context loaded from 5 years of production ML work...",
+    "Retrieving experience. Please hold — it's extensive...",
+    "Knowledge base hit. Assembling recruiter-friendly answer...",
+    "Grounding in reality, not buzzwords...",
+    "Pulling from the source — not GPT's imagination...",
+    "Career context loaded. Answer incoming...",
+]
+
+# ---------------------------------------------------------------------------
 # Streaming RAG generator
 # ---------------------------------------------------------------------------
 async def response_generator(question: str):
@@ -102,27 +219,75 @@ async def response_generator(question: str):
       {"type": "error",   "text": "..."}   — error message
     """
     q_lower = question.lower()
+    
+    # 1. Compile contextually matched fillers
+    matched = []
+    if any(x in q_lower for x in ["atlassian", "autodesk", "thomson", "reuters", "ey", "company", "companies", "where"]):
+        matched.extend([
+            "Cross-referencing Atlassian, Autodesk, Thomson Reuters, EY...",
+            "Pulling from a career built across 4 companies...",
+            "Searching across 4 companies worth of experience...",
+            "Tracing the journey from EY to Atlassian...",
+            "Digging into the Atlassian chapter..."
+        ])
+    if any(x in q_lower for x in ["gpu", "cost", "scale", "performance", "throughput", "azureml", "cuda"]):
+        matched.extend([
+            "Retrieving from the engineer who cut GPU costs by 30%...",
+            "Fetching from the guy who hit 2.5x GPU throughput...",
+            "Pulling from the engineer who supported 200+ data scientists..."
+        ])
+    if any(x in q_lower for x in ["hackathon", "prize", "winner", "sih", "bosch"]):
+        matched.extend([
+            "Asking the guy who won 4 hackathons...",
+            "Fetching from the 4x hackathon winner..."
+        ])
+    if any(x in q_lower for x in ["gold", "medalist", "academic", "scholarship", "tiet"]):
+        matched.extend([
+            "Checking what the Gold Medalist has to say...",
+            "Loading context from the Gold Medalist..."
+        ])
+    if any(x in q_lower for x in ["agent", "agentic", "langgraph", "rovo", "csm"]):
+        matched.extend([
+            "Consulting the architect of CSM-Rovo...",
+            "Retrieving from the guy who shipped agentic AI before it was cool..."
+        ])
+    if any(x in q_lower for x in ["rag", "vector", "semantic", "search", "embeddings"]):
+        matched.extend([
+            "Embedding your query into vector space...",
+            "Semantic search across career context...",
+            "Fetching relevant chunks from knowledge base...",
+            "Re-ranking retrieved passages...",
+            "Running RAG pipeline on 5 years of experience...",
+            "Scanning career vectors... strong signal found...",
+            "RAG-ing through the resume so you don't have to..."
+        ])
 
-    fillers = ["Searching Shiva's career graph..."]
+    # 2. Select distinct fillers: take up to 2 context matches, fill up to 5 with others
+    selected = []
+    if matched:
+        matched = list(set(matched))
+        selected.extend(random.sample(matched, min(len(matched), 2)))
+        
+    remaining = [f for f in FILLERS if f not in selected]
+    needed = 5 - len(selected)
+    selected.extend(random.sample(remaining, needed))
+    
+    # Shuffle organic fillers
+    random.shuffle(selected)
+    
+    # 3. Choose a beautiful final closer and append
+    satisfying_closers = [
+        "Found the relevant experience. Composing answer...",
+        "RAG pipeline complete. Composing response...",
+        "Knowledge base hit. Assembling recruiter-friendly answer...",
+        "Career context loaded. Answer incoming...",
+        "Similarity search complete. Composing answer..."
+    ]
+    # Filter out closers from the first 4 slots to prevent duplicate, and slice down to 4
+    selected = [s for s in selected if s not in satisfying_closers][:4]
+    selected.append(random.choice(satisfying_closers))
 
-    if any(x in q_lower for x in ["atlassian", "autodesk", "thomson", "reuters",
-                                    "ey", "company", "companies", "where"]):
-        fillers.append("Cross-referencing Atlassian, Autodesk, Thomson Reuters, EY...")
-    else:
-        fillers.append("Pulling context from 4 companies, 5 years, 0 fluff...")
-
-    if any(x in q_lower for x in ["gpu", "cost", "scale", "performance",
-                                    "throughput", "azureml", "cuda"]):
-        fillers.append("Retrieving from the ML engineer who optimized GPUs at 2.5x...")
-        fillers.append("Fetching from the guy who reduced GPU costs by 30%...")
-    else:
-        fillers.append("Scanning career vectors... strong signal found...")
-        fillers.append("One moment — running this through 5 years of prod ML...")
-
-    fillers.append("This answer is RAG-grounded, not hallucinated...")
-    fillers.append("Found the relevant experience. Composing answer...")
-
-    for filler in fillers:
+    for filler in selected:
         yield json.dumps({"type": "status", "text": filler}) + "\n"
         await asyncio.sleep(0.45)
 
@@ -205,6 +370,38 @@ async def home(request: Request):
         name="index.html",
         context={"portfolio": PORTFOLIO, "seo": PORTFOLIO.get("seo", {})},
     )
+
+
+@app.get("/sitemap.xml")
+async def sitemap():
+    xml_content = """<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+                            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+    <url>
+        <loc>https://shiva-rag-bot.vercel.app/</loc>
+        <lastmod>2026-05-31</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+    </url>
+    <url>
+        <loc>https://shiva-rag-bot.vercel.app/resume</loc>
+        <lastmod>2026-05-31</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+</urlset>"""
+    return Response(content=xml_content, media_type="application/xml")
+
+
+@app.get("/robots.txt")
+async def robots_txt():
+    txt_content = """User-agent: *
+Allow: /
+
+Sitemap: https://shiva-rag-bot.vercel.app/sitemap.xml"""
+    return Response(content=txt_content, media_type="text/plain")
 
 
 @app.get("/resume")

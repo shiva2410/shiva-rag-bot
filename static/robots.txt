@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://shiva-rag-bot.vercel.app/sitemap.xml

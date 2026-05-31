@@ -184,6 +184,16 @@ async function askResume(question) {
     markActiveDone();
     answerBox.classList.remove("loading");
 
+    // Dynamic UI transition: move suggestions below answer & empty input
+    const suggestionRow = document.getElementById("suggestion-row");
+    const assistantPanel = document.getElementById("assistant-panel");
+    if (suggestionRow && assistantPanel) {
+      assistantPanel.parentNode.insertBefore(suggestionRow, assistantPanel.nextSibling);
+    }
+    if (askInput) {
+      askInput.value = "";
+    }
+
   } catch (error) {
     answerBox.classList.remove("loading");
     answerBox.innerHTML = `
@@ -194,6 +204,96 @@ async function askResume(question) {
 }
 
 
+/* ==========================================================================
+   EASTER EGGS IMPLEMENTATION
+   ========================================================================== */
+
+// 1. Antigravity floating elements mode
+function toggleAntigravity() {
+  const isActive = document.body.classList.toggle("antigravity-active");
+  
+  document.querySelectorAll(".glass-card, .project-card, .timeline-card, .skill-badge").forEach((el, index) => {
+    if (isActive) {
+      const duration = 4 + (index % 4) * 0.75;
+      el.style.setProperty("--float-duration", `${duration}s`);
+    } else {
+      el.style.removeProperty("--float-duration");
+    }
+  });
+
+  const panel = document.getElementById("assistant-panel");
+  if (panel) {
+    panel.style.display = "block";
+    answerBox.classList.remove("terminal-console");
+    answerBox.innerHTML = isActive 
+      ? `<div style="font-family:'JetBrains Mono',monospace;color:#10b981;font-weight:700;">✦ [ANTIGRAVITY MODE ACTIVATED]</div>
+         <p style="color:#64748b;font-size:0.875rem;margin-top:0.5rem;">All layout cards have lost gravity! Bobbing floating state active. Double-click the logo again or type <strong>/normal</strong> to land them safely.</p>`
+      : `<div style="font-family:'JetBrains Mono',monospace;color:#475569;font-weight:700;">✦ Antigravity elements safely landed.</div>`;
+  }
+}
+
+// 2. Secret Dev Mode Hacker CLI Terminal console
+function triggerTerminalConsole() {
+  const panel = document.getElementById("assistant-panel");
+  if (panel) {
+    panel.style.display = "block";
+  }
+  
+  answerBox.innerHTML = "";
+  answerBox.classList.add("terminal-console");
+  
+  const terminalLines = [
+    { text: "SHIVA THAVANI AI ENGINEER ROOT KERNEL v2.5.0-PROD", type: "white" },
+    { text: "==================================================", type: "white" },
+    { text: "> Initializing serverless security override...", type: "blue" },
+    { text: "> Bypassing standard RAG query filters... [OK]", type: "green" },
+    { text: "> Securing SSH tunnel link to Autodesk AzureML servers...", type: "blue" },
+    { text: "> Connected to Autodesk CUDA inference proxy (2.5x throughput enabled)...", type: "green" },
+    { text: "> Accessing Thomson Reuters MLOps platform registries...", type: "blue" },
+    { text: "> De-risked production model registry loaded: [LLaMA-3, Claude-3, GPT-4]", type: "yellow" },
+    { text: "> Grounding current core context vectors...", type: "blue" },
+    { text: "  | 15+ production AI systems shipped successfully", type: "green" },
+    { text: "  | $500K+ in GPU/infra spend optimized (30% enterprise spend)", type: "green" },
+    { text: "  | ~40% reduction in MTTR via CSM-Rovo agentic support", type: "green" },
+    { text: "  | 40% resolution rate in complex support workflows using AI Agent", type: "green" },
+    { text: "> Establishing active Rovo-Agent workflows via LangGraph...", type: "blue" },
+    { text: "> [SUCCESS] Shiva Thavani DevMode Console unlocked! Enter '/antigravity' or normal questions.", type: "green" }
+  ];
+  
+  let i = 0;
+  function printNextLine() {
+    if (i < terminalLines.length) {
+      const line = terminalLines[i];
+      const p = document.createElement("p");
+      if (line.type === "green") p.className = "terminal-green";
+      else if (line.type === "yellow") p.className = "terminal-yellow";
+      else if (line.type === "white") p.className = "terminal-white";
+      
+      p.textContent = line.text;
+      answerBox.appendChild(p);
+      answerBox.scrollTop = answerBox.scrollHeight;
+      i++;
+      setTimeout(printNextLine, 180);
+    } else {
+      const blink = document.createElement("span");
+      blink.className = "terminal-blink";
+      answerBox.appendChild(blink);
+      
+      // Move suggestion chips and clear
+      const suggestionRow = document.getElementById("suggestion-row");
+      const assistantPanel = document.getElementById("assistant-panel");
+      if (suggestionRow && assistantPanel) {
+        assistantPanel.parentNode.insertBefore(suggestionRow, assistantPanel.nextSibling);
+      }
+      if (askInput) {
+        askInput.value = "";
+      }
+    }
+  }
+  
+  printNextLine();
+}
+
 
 menuToggle?.addEventListener("click", () => {
   mobileMenu.classList.toggle("hidden");
@@ -203,16 +303,46 @@ document.querySelectorAll("#mobile-menu a").forEach((link) => {
   link.addEventListener("click", () => mobileMenu.classList.add("hidden"));
 });
 
+// Brand Logo Double-Click Antigravity toggle
+const logo = document.getElementById("brand-logo");
+logo?.addEventListener("dblclick", (e) => {
+  e.preventDefault();
+  toggleAntigravity();
+});
+
 askForm?.addEventListener("submit", (event) => {
   event.preventDefault();
-  askResume(askInput.value);
+  const query = askInput.value.trim().toLowerCase();
+  
+  if (query === "/sudo dev" || query === "/matrix" || query === "/terminal" || query === "/help" || query === "/dev") {
+    triggerTerminalConsole();
+  } else if (query === "/antigravity" || query === "/float") {
+    if (!document.body.classList.contains("antigravity-active")) {
+      toggleAntigravity();
+    }
+    askInput.value = "";
+  } else if (query === "/normal" || query === "/land") {
+    if (document.body.classList.contains("antigravity-active")) {
+      toggleAntigravity();
+    }
+    askInput.value = "";
+  } else {
+    answerBox.classList.remove("terminal-console");
+    askResume(askInput.value);
+  }
 });
 
 document.querySelectorAll(".suggestion-chip").forEach((button) => {
   button.addEventListener("click", () => {
     const question = button.dataset.question || button.textContent;
     askInput.value = question;
-    askResume(question);
+    const query = question.trim().toLowerCase();
+    if (query === "/sudo dev" || query === "/matrix" || query === "/terminal" || query === "/help" || query === "/dev") {
+      triggerTerminalConsole();
+    } else {
+      answerBox.classList.remove("terminal-console");
+      askResume(question);
+    }
   });
 });
 

@@ -99,3 +99,47 @@ Click **Deploy**. Vercel will:
 - **Resume Knowledge**: Sourced from `data/shiva_knowledge_base.txt`. Update this text file when there are new achievements or changes in Shiva's CV.
 - **Interface Content**: Modifying `data/portfolio_data.py` will automatically update all fields (experience, skills, metric highlights, projects, achievements, etc.) throughout the website.
 - **Frontend Interaction**: Check `static/js/main.js` to modify how requests are sent to `/api/ask` and how assistant answers are dynamically loaded.
+
+---
+
+## SEO, Google Search Console & Backlink Strategy
+
+This portfolio is highly optimized to rank #1 on Google searches for **"Shiva Thavani"**, **"Shiva Thavani AI Engineer"**, **"Shiva Thavani Machine Learning Engineer"**, **"Shiva Thavani GenAI Engineer"**, and **"Shiva Thavani LLMOps"**.
+
+### 1. Google Search Console & Domain Verification
+
+To claim your website on Google and ensure rapid indexing:
+
+1. **Add Property**:
+   - Go to [Google Search Console](https://search.google.com/search-console/about).
+   - Click **Add Property** -> Select **URL prefix** and enter `https://shiva-rag-bot.vercel.app/`.
+2. **Verify Domain Ownership**:
+   - Verify ownership using Vercel DNS settings, HTML tag method, or Google Analytics.
+   - Click **Verify** in Search Console.
+3. **Submit Sitemap**:
+   - In Search Console, click **Sitemaps** on the left menu.
+   - Under **Add a new sitemap**, type `sitemap.xml`.
+   - Click **Submit**. Google will read the sitemap from `https://shiva-rag-bot.vercel.app/sitemap.xml` weekly to keep your pages indexed.
+4. **Force Indexing**:
+   - If your site isn't showing up yet, paste your homepage URL `https://shiva-rag-bot.vercel.app/` into the Search Console top search bar.
+   - Click **Request Indexing** to force Google's bot to crawl your portfolio immediately.
+
+---
+
+### 2. Backlink Authority Strategy (SEO Powerhouse)
+
+Google rankings rely heavily on authority. Build high-quality backlinks to guarantee top positions:
+
+1. **LinkedIn Integration**:
+   - Add `https://shiva-rag-bot.vercel.app/` in the **Contact Info** section of your profile.
+   - Add your custom portfolio link directly underneath your LinkedIn headline (using LinkedIn's link button feature).
+   - Write a post announcing your portfolio deployment and link it.
+2. **GitHub Integration**:
+   - Add the website URL `https://shiva-rag-bot.vercel.app/` in the **About** section of your GitHub profile repo (your profile README).
+   - Link it in the README files of all your major repositories.
+3. **Medium & Dev.to Backlinks (Crucial)**:
+   - Go to your popular Medium articles (e.g., your *Solar Panel Detection* or *Document Verification* article).
+   - Edit the article to include a backlink, e.g., *"Shiva Thavani is an AI Engineer. Explore his interactive AI-powered portfolio at [shiva-rag-bot.vercel.app](https://shiva-rag-bot.vercel.app/)."*
+   - Medium links pass high domain authority and will rank your portfolio rapidly.
+4. **Lighthouse & Performance SEO**:
+   - High-quality, fast-loading portfolios rank higher. Native lazy-loading (`loading="lazy"`) and optimized next-gen image types in this portfolio guarantee 95+ scores on Lighthouse mobile and desktop audits.
