@@ -112,10 +112,7 @@ Managed the full MLOps lifecycle including data processing pipelines, model trai
 Deployed and served production LLMs including LLaMA 2, LLaMA 3, Claude 3, and GPT-4 on both AWS Bedrock and Azure AI Studio.
 Implemented model evaluation and optimization workflows to ensure deployed models met quality and latency SLAs before reaching production.
 This gave Thomson Reuters' 200+ data scientists model-agnostic access to state-of-the-art LLMs through a unified platform API.
-4. Agentic AI Incident Resolution (Autodesk-era pattern, also applied at TR)
-Developed Agentic AI incident-resolution workflows using LangChain, RAG, VectorDBs, OpenAI models, and ReAct/Chain-of-Thought reasoning.
-These agents could autonomously investigate production incidents, retrieve relevant runbooks from VectorDBs, and propose or execute remediation steps.
-5. Platform Leadership
+4. Platform Leadership
 Progressed from AI Engineer to Senior AI Engineer in under a year — took on ownership of the AI Platform service, leading it from initial development through broad organizational adoption.
 Responsible not just for technical delivery but for stakeholder management and driving adoption across 200+ platform users.
 Q7 — What Did You Build at Autodesk?
