@@ -11,7 +11,7 @@ function updateNavbar() {
 }
 
 function setActiveLink() {
-  const sections = ["about", "experience", "skills", "projects", "achievements", "contact"];
+  const sections = ["about", "experience", "skills", "projects", "achievements", "publications", "contact"];
   let active = "";
   sections.forEach((id) => {
     const section = document.getElementById(id);

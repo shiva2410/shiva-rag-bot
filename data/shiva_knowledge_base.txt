@@ -413,3 +413,25 @@ Languages: Python, SQL, C++, Golang, JavaScript, Kotlin, Shell Script
 Inference Runtimes: ONNX, TFLite, CUDA, FastAPI, Flask
 Document generated for RAG ingestion — Shiva Thavani AI/ML Profile Knowledge Base
 Each section is self-contained and optimized for semantic chunking and retrieval.
+
+---PUBLISHED RESEARCH---
+Title: Pose Invariant Non-Frontal 2D, 2.5D Face Detection and Recognition Technique
+Journal: International Journal of Information Technology, Springer (2023)
+Co-authors: Sahil Sharma, Vijay Kumar
+DOI: 10.1007/s41870-023-01335-2
+Link: https://link.springer.com/article/10.1007/s41870-023-01335-2
+Citations: 4
+
+Summary:
+Proposed the PIIR (Pose Invariant Identity Recognition) technique for robust 
+face recognition across pose variations. Uses facial landmarks to measure face 
+resemblance, vigorous to pose disparity. Applies face frontalization and 
+discriminative learning techniques with 3D Morphable Models for pose invariance.
+Validated on CAS-PEAL face dataset achieving 90.24% authentication accuracy 
+at 30° pan-angle. Also applied to 2.5D face datasets with variant facial 
+positions and expressions.
+
+Key result: 90.24% authentication accuracy at 30° pan-angle
+Dataset: CAS-PEAL (2D and 2.5D)
+Area: Computer Vision, Face Recognition, Biometrics
+---END PUBLISHED RESEARCH---

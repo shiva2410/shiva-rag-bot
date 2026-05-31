@@ -260,6 +260,13 @@ async def response_generator(question: str):
             "Scanning career vectors... strong signal found...",
             "RAG-ing through the resume so you don't have to..."
         ])
+    if any(x in q_lower for x in ["research", "paper", "published", "publication","machine learning","deep learning","computer vision","springer", "face recognition", "piir", "pose"]):
+        matched.extend([
+            "Pulling from the Springer-published researcher...",
+            "Checking across published research and real-world shipped systems...",
+            "Fetching from research papers and production deployments alike...",
+            "Retrieving from published research and industry production deployments..."
+        ])
 
     # 2. Select distinct fillers: take up to 2 context matches, fill up to 5 with others
     selected = []
