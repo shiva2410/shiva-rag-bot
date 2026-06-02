@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en" class="scroll-smooth">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,6 +9,8 @@
   <meta name="keywords" content="{{ seo.keywords }}">
   <meta name="author" content="{{ portfolio.profile.name }}">
   <link rel="canonical" href="https://shiva-rag-bot.vercel.app/">
+  <meta name="robots" content="index, follow">
+  <meta name="google-site-verification" content="rTvFb_iWid_EZ-TDLZOVhBcl1PRgCj5kPgoIysFMsn8" />
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
@@ -91,7 +94,9 @@
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="{{ url_for('static', path='css/styles.css') }}">
   
   <!-- Vercel Web Analytics -->
@@ -100,8 +105,9 @@
   </script>
   <script defer src="https://cdn.vercel-insights.com/v1/script.js"></script>
 </head>
+
 <body class="bg-[#f8fafc] text-slate-900 antialiased">
-<!--
+  <!--
   👋 Hey, you found the source.
 
   Stack: FastAPI + Gemini RAG + Tailwind + Vercel
@@ -124,4 +130,5 @@
   {% include "components/footer.html" %}
   <script src="{{ url_for('static', path='js/main.js') }}" defer></script>
 </body>
+
 </html>
