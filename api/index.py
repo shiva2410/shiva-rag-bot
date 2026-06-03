@@ -448,6 +448,14 @@ async def serve_favicon():
     return FileResponse(str(path), media_type="image/svg+xml")
 
 
+@app.api_route("/favicon.png", methods=["GET", "HEAD"], include_in_schema=False)
+async def serve_favicon_png():
+    path = BASE_DIR / "static" / "images" / "favicon.svg"
+    if not path.exists():
+        raise HTTPException(status_code=404, detail="Favicon not found.")
+    return FileResponse(str(path), media_type="image/svg+xml")
+
+
 @app.get("/resume")
 async def resume():
     path = BASE_DIR / "static" / "resume" / "Shiva_Resume.pdf"
