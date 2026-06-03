@@ -417,13 +417,13 @@ async def sitemap():
                             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
     <url>
         <loc>https://shiva-rag-bot.vercel.app/</loc>
-        <lastmod>2026-05-31</lastmod>
+        <lastmod>2026-06-03</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
         <loc>https://shiva-rag-bot.vercel.app/resume</loc>
-        <lastmod>2026-05-31</lastmod>
+        <lastmod>2026-06-03</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
