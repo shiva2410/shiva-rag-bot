@@ -221,13 +221,34 @@ async def response_generator(question: str):
     
     # 1. Compile contextually matched fillers
     matched = []
-    if any(x in q_lower for x in ["atlassian", "autodesk", "thomson", "reuters", "ey", "company", "companies", "where"]):
+    if any(x in q_lower for x in ["company", "companies", "where"]):
         matched.extend([
             "Cross-referencing Atlassian, Autodesk, Thomson Reuters, EY...",
             "Pulling from a career built across 4 companies...",
-            "Searching across 4 companies worth of experience...",
-            "Tracing the journey from EY to Atlassian...",
-            "Digging into the Atlassian chapter..."
+            "Searching across 4 companies worth of experience..."
+        ])
+    if "atlassian" in q_lower:
+        matched.extend([
+            "Digging into the Atlassian chapter...",
+            "Analyzing Agentic AI work at Atlassian...",
+            "Tracing the journey from EY to Atlassian..."
+        ])
+    if "autodesk" in q_lower:
+        matched.extend([
+            "Retrieving Autodesk experience...",
+            "Checking engineering metrics at Autodesk...",
+            "Analyzing GPU cost optimization work at Autodesk..."
+        ])
+    if any(x in q_lower for x in ["thomson", "reuters"]):
+        matched.extend([
+            "Digging into the Thomson Reuters chapter...",
+            "Checking retrieval pipelines built at Thomson Reuters...",
+            "Retrieving Agentic AI incident resolution work at Thomson Reuters..."
+        ])
+    if "ey" in q_lower:
+        matched.extend([
+            "Retrieving early career experience at EY...",
+            "Tracing the journey from EY to Atlassian..."
         ])
     if any(x in q_lower for x in ["gpu", "cost", "scale", "performance", "throughput", "azureml", "cuda"]):
         matched.extend([
@@ -275,8 +296,18 @@ async def response_generator(question: str):
         selected.extend(random.sample(matched, min(len(matched), 2)))
         
     remaining = [f for f in FILLERS if f not in selected]
+    
+    if any(x in q_lower for x in ["thomson", "reuters"]):
+        remaining = [f for f in remaining if "atlassian" not in f.lower() and "autodesk" not in f.lower() and "ey" not in f.lower()]
+    elif "atlassian" in q_lower:
+        remaining = [f for f in remaining if "reuters" not in f.lower() and "autodesk" not in f.lower() and "ey" not in f.lower()]
+    elif "autodesk" in q_lower:
+        remaining = [f for f in remaining if "atlassian" not in f.lower() and "reuters" not in f.lower() and "ey" not in f.lower()]
+    elif "ey" in q_lower:
+        remaining = [f for f in remaining if "atlassian" not in f.lower() and "reuters" not in f.lower() and "autodesk" not in f.lower()]
+
     needed = 5 - len(selected)
-    selected.extend(random.sample(remaining, needed))
+    selected.extend(random.sample(remaining, min(len(remaining), needed)))
     
     # Shuffle organic fillers
     random.shuffle(selected)
