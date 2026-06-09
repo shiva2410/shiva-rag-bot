@@ -335,12 +335,32 @@ Knowledge base:
         settings = get_settings()
         client = get_gemini_client()
         genai_types = get_genai_types()
-        response = client.models.generate_content(
-            model=settings.gemini_model,
-            contents=prompt,
-            config=genai_types.GenerateContentConfig(temperature=0.35),
-        )
-        return response.text or ""
+        APIError = get_api_error_class()
+        
+        primary_model = settings.gemini_model
+        fallback_model = "gemini-2.5-flash-lite"
+        
+        try:
+            response = client.models.generate_content(
+                model=primary_model,
+                contents=prompt,
+                config=genai_types.GenerateContentConfig(temperature=0.35),
+            )
+            return response.text or ""
+        except APIError as exc:
+            if primary_model != fallback_model:
+                print(f"[GEMINI FALLBACK] Primary model '{primary_model}' failed: {exc}. Trying fallback '{fallback_model}'...")
+                try:
+                    response = client.models.generate_content(
+                        model=fallback_model,
+                        contents=prompt,
+                        config=genai_types.GenerateContentConfig(temperature=0.35),
+                    )
+                    return response.text or ""
+                except Exception as fallback_exc:
+                    print(f"[GEMINI FALLBACK ERROR] Fallback model '{fallback_model}' also failed: {fallback_exc}")
+                    raise fallback_exc
+            raise exc
 
     APIError = get_api_error_class()
     try:
