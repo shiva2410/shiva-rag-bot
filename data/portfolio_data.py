@@ -24,7 +24,7 @@ PORTFOLIO = {
         {"value": "15+", "label": "Production Systems Shipped"},
         {"value": "5+", "label": "Years end-to-end ML Exp"},
         {"value": "$500K+", "label": "GPU/Infra Costs Optimized"},
-        {"value": "40%", "label": "Complex Support Resolution"},
+        {"value": "40%", "label": "AI Agent Resolution Rate"},
     ],
     "about": [
         "AI/ML Engineer with 5+ years of end-to-end ML experience building enterprise-scale AI systems, LLM applications, and MLOps platforms across Atlassian, Autodesk, Thomson Reuters, and EY.",
