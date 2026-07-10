@@ -55,7 +55,7 @@ Create a `.env` file in the root directory (already added to `.gitignore`):
 
 ```env
 GEMINI_API_KEY="your-actual-api-key"
-GEMINI_MODEL="gemini-1.5-flash"
+GEMINI_MODEL="gemini-3.1-flash-lite"
 ```
 
 > [!IMPORTANT]
@@ -85,7 +85,7 @@ Make sure you have:
 - Set the **Framework Preset** to **Other** (Vercel automatically detects the `vercel.json` config).
 - In **Environment Variables**, add:
   - `GEMINI_API_KEY`: Your Google Gemini API Key.
-  - `GEMINI_MODEL`: `gemini-1.5-flash` (Optional, defaults to `gemini-1.5-flash`).
+  - `GEMINI_MODEL`: `gemini-3.1-flash-lite` (Optional, defaults to `gemini-3.1-flash-lite`).
 
 ### 3. Deploy
 Click **Deploy**. Vercel will:

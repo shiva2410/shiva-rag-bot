@@ -37,7 +37,7 @@ if str(BASE_DIR) not in sys.path:
 # ---------------------------------------------------------------------------
 class Settings(BaseSettings):
     gemini_api_key: str = Field(..., validation_alias="GEMINI_API_KEY")
-    gemini_model: str = Field("gemini-2.5-flash", validation_alias="GEMINI_MODEL")
+    gemini_model: str = Field("gemini-3.1-flash-lite", validation_alias="GEMINI_MODEL")
 
     class Config:
         env_file = ".env"
